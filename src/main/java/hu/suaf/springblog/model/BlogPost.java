@@ -1,6 +1,7 @@
 package hu.suaf.springblog.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,10 +15,10 @@ public class BlogPost {
     private long id;
 
     private String title;
+    private String text;
 
 
-    @ManyToOne
-    @JoinColumn(name = "blogger_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Blogger author;
 
 
