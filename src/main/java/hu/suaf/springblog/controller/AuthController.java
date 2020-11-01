@@ -1,6 +1,6 @@
 package hu.suaf.springblog.controller;
 
-import hu.suaf.springblog.model.ContactUser;
+import hu.suaf.springblog.model.Blogger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class AuthController {
 
     @GetMapping("/login")
-    public String loginForm(ContactUser contactUser) {
+    public String loginForm(Blogger blogger) {
         return "login";
     }
 
     @GetMapping("/register")
-    public String registerForm(ContactUser contactUser) {
+    public String registerForm(Blogger blogger) {
         return "register";
     }
 

@@ -4,22 +4,22 @@
     <div th:replace="fragments/header :: header (title='Register')"></div>
     <body>
         <div class="container">
-            <!--/*@thymesVar id="contactUser" type="hu.suaf.springblog.model.ContactUser"*/-->
-            <form action="#" th:action="@{/login}" th:object="${contactUser}" method="post">
+            <!--/*@thymesVar id="" type=""*/-->
+            <form action="#" th:action="@{/login}" th:object="" method="post">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" th:field="*{username}" >
-                    <span class="validationError" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+                    <input type="text" class="form-control" id="username" th:field="" >
+                    <span class="validationError" th:if="" th:errors=""></span>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" th:field="*{email}">
-                    <span class="validationError" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                    <input type="email" class="form-control" id="email" th:field="">
+                    <span class="validationError" th:if="" th:errors=""></span>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" th:field="*{password}">
-                    <span class="validationError" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                    <input type="password" class="form-control" id="password" th:field="">
+                    <span class="validationError" th:if="" th:errors=""></span>
                 </div>
                 <button type="submit" class="btn btn-primary">Register</button>
             </form>

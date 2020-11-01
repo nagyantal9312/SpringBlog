@@ -1,8 +1,8 @@
 package hu.suaf.springblog.config;
 
-import hu.suaf.springblog.model.ContactUser;
+import hu.suaf.springblog.model.Blogger;
 import hu.suaf.springblog.model.Role;
-import hu.suaf.springblog.repository.ContactUserRepository;
+import hu.suaf.springblog.repository.BloggerRepository;
 import hu.suaf.springblog.repository.RoleRepository;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class UserDataSetup implements ApplicationListener<ContextRefreshedEvent> {
 
 
-    private ContactUserRepository contactUserRepository;
+    private BloggerRepository bloggerRepository;
     private RoleRepository roleRepository;
     boolean alreadySetup = false;
    // private PasswordEncoder passwordEncoder;
@@ -29,13 +29,14 @@ public class UserDataSetup implements ApplicationListener<ContextRefreshedEvent>
         createRoleIfNotExists("USER");
 
         Role adminRole = roleRepository.findByName("ADMIN");
-        ContactUser user = new ContactUser();
-        user.setEnabled(true);
-        user.setRoles(Arrays.asList(adminRole));
+        Blogger blogger = new Blogger();
+
+        blogger.setEnabled(true);
+        blogger.setRoles(Arrays.asList(adminRole));
      //   user.setPassword(passwordEncoder.encode("asd"));
-        user.setUsername("test");
-        user.setEmail("test@test.com");
-        contactUserRepository.save(user);
+        blogger.setUsername("test");
+        blogger.setEmail("test@test.com");
+        bloggerRepository.save(blogger);
 
         alreadySetup = true;
 
