@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Data
-public class Blogger extends AuditableEntity<String> {
+public class Blogger {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

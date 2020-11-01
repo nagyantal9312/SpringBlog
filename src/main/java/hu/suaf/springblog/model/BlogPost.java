@@ -2,6 +2,7 @@ package hu.suaf.springblog.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.List;
@@ -20,6 +21,7 @@ public class BlogPost{
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Blogger author;
+
 
     @ManyToMany
     private List<Category> categories;

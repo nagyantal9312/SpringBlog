@@ -6,7 +6,58 @@
     <div th:replace="fragments/menu :: menu(current='New Post')"></div>
 
 
-</div>
+    <div class="container">
+        <!--/*@thymesVar id="blogPost" type="hu.suaf.springblog.model.BlogPost"*/-->
+        <form action="#" method="post" th:action="@{/blogger/post-create}" th:object="${blogPost}">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" th:field="*{title}" >
+                <span class="validationError" ></span>
+            </div>
+            <div class="form-group">
+                <label for="text">Text</label>
+                <textarea class="form-control" id="text" th:field="*{text}"></textarea>
+            </div>
+
+
+
+
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+
+    <div class="form-group">
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+                Default checkbox
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
+            <label class="form-check-label" for="defaultCheck2">
+                Disabled checkbox
+            </label>
+        </div>
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
 
 
 </body>
