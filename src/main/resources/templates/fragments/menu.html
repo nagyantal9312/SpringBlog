@@ -1,0 +1,29 @@
+
+
+
+
+
+
+
+
+<nav th:fragment="menu(current)" class="navbar navbar-expand-lg navbar-light bg-light" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
+    <a class="navbar-brand" href="#">
+        <img class="logo" th:src="@{/images/logo.svg}">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+
+            <a class="nav-item nav-link" th:classappend="${current} == 'List Posts' ? 'active' : ''" href="#" th:href="@{/blogger}">List posts</a>
+            <a class="nav-item nav-link" th:classappend="${current} == 'My Posts' ? 'active' : ''" href="#" th:href="@{/blogger}">My Posts</a>
+            <a class="nav-item nav-link" th:classappend="${current} == 'New Post' ? 'active' : ''" href="#" th:href="@{/blogger/post-create}">New Post</a>
+            <a class="nav-item nav-link" th:classappend="${current} == 'Profile' ? 'active' : ''" href="#" th:href="@{/blogger/profile}">Profile</a>
+
+
+
+
+        </div>
+    </div>
+</nav>

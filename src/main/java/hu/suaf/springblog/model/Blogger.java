@@ -2,7 +2,6 @@ package hu.suaf.springblog.model;
 
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Data
-public class Blogger {
+public class Blogger extends AuditableEntity<String> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,13 +21,11 @@ public class Blogger {
 
     private Date birthDate;
 
-    //private boolean active;
 
-
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "author")
     private List<BlogPost> blogPosts;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "author")
     private List<Comment> comments;
 
 

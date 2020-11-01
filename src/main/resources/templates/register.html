@@ -4,8 +4,8 @@
     <div th:replace="fragments/header :: header (title='Register')"></div>
     <body>
         <div class="container">
-            <!--/*@thymesVar id="contactBlogger" type="hu.suaf.springblog.model.ContactBlogger"*/-->
-            <form action="#" th:action="@{/login}" th:object="${contactBlogger}" method="post">
+            <!--/*@thymesVar id="contactUser" type="hu.suaf.springblog.model.ContactUser"*/-->
+            <form action="#" th:action="@{/login}" th:object="${contactUser}" method="post">
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" class="form-control" id="username" th:field="*{username}" >

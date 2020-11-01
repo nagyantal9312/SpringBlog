@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Data
-public class BlogPost {
+public class BlogPost{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,9 +21,11 @@ public class BlogPost {
     @ManyToOne(fetch = FetchType.LAZY)
     private Blogger author;
 
-
-    @OneToMany
+    @ManyToMany
     private List<Category> categories;
+
+    @OneToMany(mappedBy = "blogPost")
+    private List<Comment> comments;
 
 
 

@@ -9,7 +9,7 @@ import java.util.Collection;
 
 @Entity
 @Data
-public class ContactBlogger{
+public class ContactUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
