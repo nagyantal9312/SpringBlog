@@ -25,12 +25,12 @@ public abstract class AuditableEntity<B> implements Serializable {
     @Column(updatable = false)
     private Date createdDate;
 
-    @LastModifiedDate
-    private Date lastModifiedDate;
-
     @CreatedBy
     @Column(updatable = false)
     private B createdBy;
+
+    @LastModifiedDate
+    private Date lastModifiedDate;
 
     @LastModifiedBy
     private B lastModifiedBy;

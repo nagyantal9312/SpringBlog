@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Data
-public class BlogPost{
+public class BlogPost extends AuditableEntity<String>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,17 +19,19 @@ public class BlogPost{
     private String text;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Blogger author;
+   /* @ManyToOne(fetch = FetchType.LAZY)
+    private Blogger author;*/
 
 
     @ManyToMany
     private List<Category> categories;
 
+
     @OneToMany(mappedBy = "blogPost")
     private List<Comment> comments;
 
-
+    @Transient
+    private String categoryHelper;
 
 
 }
