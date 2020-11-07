@@ -25,17 +25,25 @@ import java.util.List;
 @RequestMapping("/blogger")
 public class BloggerController {
 
+    private BlogPostService blogPostService;
+    private CategoryService categoryService;
+
     @Autowired
     public BloggerController(BlogPostService blogPostService, CategoryService categoryService) {
         this.blogPostService = blogPostService;
         this.categoryService = categoryService;
     }
 
-    private BlogPostService blogPostService;
-    private CategoryService categoryService;
+
 
     @GetMapping("")
-    public String listBlogPosts(Model model){
+    public String listBlogPosts_get(Model model){
+
+        return "home";
+    }
+
+    @PostMapping("")
+    public String listBlogPosts_post(){
 
         return "home";
     }

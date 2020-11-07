@@ -14,8 +14,8 @@ public class Comment {
 
     private String text;
 
-   @ManyToOne(fetch = FetchType.LAZY)
-   private Blogger author;
+  /* @ManyToOne(fetch = FetchType.LAZY)
+   private Blogger author;*/
 
    @ManyToOne(fetch = FetchType.LAZY)
    private BlogPost blogPost;

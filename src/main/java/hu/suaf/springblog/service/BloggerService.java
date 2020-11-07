@@ -25,7 +25,7 @@ public class BloggerService {
     }
 
     public void saveBlogger(Blogger blogger) {
-        System.out.println("ITVOK");
+
         blogger.setEnabled(true);
         Role role = roleService.findByName("USER");
         blogger.setRoles(Arrays.asList(role));
