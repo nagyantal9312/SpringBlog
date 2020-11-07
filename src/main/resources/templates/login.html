@@ -6,16 +6,16 @@
     <body>
         <div class="container">
             <!--/*@thymesVar id="blogger" type="hu.suaf.springblog.model.Blogger"*/-->
-            <form action="#" th:action="@{/login}" th:object="${blogger}" method="post">
+            <form action="#"  method="post">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" th:field="*{username}" >
-                    <span class="validationError" th:if="" th:errors=""></span>
+                    <input type="text" class="form-control" id="username"  >
+                    <span class="validationError" ></span>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" th:field="*{password}">
-                    <span class="validationError" th:if="" th:errors=""></span>
+                    <input type="password" class="form-control" id="password" >
+                    <span class="validationError" ></span>
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
                 <a th:href="@{/register}" class="btn btn-secondary">Register</a>
