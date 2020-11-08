@@ -52,5 +52,12 @@ public class BlogPostController {
     }
 
 
+    @GetMapping("/delete/{id}")
+    public String deleteBlogPost(@PathVariable long id){
+        blogPostService.deleteBlogPost(id);
+        return "redirect:/blogger";
+    }
+
+
 
 }

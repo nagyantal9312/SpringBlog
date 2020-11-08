@@ -44,7 +44,7 @@ public class BlogPostService {
 
 
     public List<BlogPost> listBlogPosts() {
-        return blogPostRepository.findAll();
+        return blogPostRepository.findAllByOrderByLastModifiedDateDesc();
     }
 
     public BlogPost findBlogPostById(long id) {
@@ -59,7 +59,10 @@ public class BlogPostService {
         return blogPost;
     }
 
+    public void deleteBlogPost(long id) {
+        blogPostRepository.deleteById(id);
 
+    }
 
 
 }
