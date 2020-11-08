@@ -22,7 +22,7 @@ public class Blogger extends AuditableEntity<String> implements UserDetails {
     private String password;
     private String name;
 
-
+    @Column(columnDefinition = "LONGTEXT")
     private String photo;
     private Date birthDate;
 
@@ -65,5 +65,8 @@ public class Blogger extends AuditableEntity<String> implements UserDetails {
         return true;
     }
 
-
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

@@ -2,24 +2,22 @@ package hu.suaf.springblog.controller;
 
 import hu.suaf.springblog.model.BlogPost;
 import hu.suaf.springblog.model.Blogger;
-import hu.suaf.springblog.model.Category;
 import hu.suaf.springblog.service.BlogPostService;
 import hu.suaf.springblog.service.CategoryService;
-import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.validation.Valid;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 @Controller
 @RequestMapping("/blogger")
@@ -27,6 +25,7 @@ public class BloggerController {
 
     private BlogPostService blogPostService;
     private CategoryService categoryService;
+
 
     @Autowired
     public BloggerController(BlogPostService blogPostService, CategoryService categoryService) {
@@ -38,7 +37,7 @@ public class BloggerController {
 
     @GetMapping("")
     public String listBlogPosts_get(Model model){
-
+        model.addAttribute("posztok", blogPostService.listBlogPosts());
         return "home";
     }
 
@@ -64,6 +63,13 @@ public class BloggerController {
     }
 
 
+    @GetMapping("/profile")
+    public String createProfilePage(@AuthenticationPrincipal Blogger blogger, Model model) {
+        model.addAttribute("loggedInBlogger", blogger);
+        return "profile";
+    }
+
+
 
 
     @InitBinder
@@ -73,13 +79,6 @@ public class BloggerController {
 
 
 
-
-
-
-    @GetMapping("/profile")
-    public String viewProfile(Model model){
-        return "profile";
-    }
 
 
 

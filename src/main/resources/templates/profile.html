@@ -6,15 +6,27 @@
     <div th:replace="fragments/menu :: menu(current='Profile')"></div>
 
 
-    <div>
-        <img src="..." class="rounded float-left" alt="...">
-        <div>
-            <p>Felhasznalonev</p>
-            <p>Nev</p>
-            <p>Email</p>
-            <p>Szuletesi ido</p>
-            <p>Aktiv</p>
+
+
+    <div class="container">
+        <!--/*@thymesVar id="logged" type="hu.suaf.springblog.model.Blogger"*/-->
+        <div class="row" th:object="${loggedInBlogger}">
+            <div class="col">
+                <img class="rounded float-left" alt="..." >
+                <input type="file">
+            </div>
+            <div class="col">
+                <span th:text="${loggedInBlogger.name}"></span>
+                <span th:text="${loggedInBlogger.username}"></span>
+                <span th:text="${loggedInBlogger.email}"></span>
+                <span th:text="${loggedInBlogger.birthDate}"></span>
+                <span th:text="${loggedInBlogger.isEnabled()}"></span>
+            </div>
+
+
         </div>
+
+
 
 
     </div>

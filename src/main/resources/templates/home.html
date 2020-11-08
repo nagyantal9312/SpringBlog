@@ -7,5 +7,36 @@
 
 
 
+
+
+
+<main th:object="${posztok}">
+    <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action" th:each="item : ${posztok}">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1" th:text="${item.title}">Cim</h5>
+                <small th:text="${item.createdDate}">Creationdate</small>
+            </div>
+            <p>Szerző:</p>
+            <p class="mb-1" th:text="${item.createdBy}"></p>
+            <small>Kategóriák:</small>
+            <small th:each="elem : ${item.categories}">
+                <span class="badge badge-primary" th:text="${elem.name}">Primary</span>
+            </small>
+        </a>
+    </div>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

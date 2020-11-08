@@ -35,5 +35,9 @@ public class BloggerService {
     }
 
 
+    public Blogger findByUsername(String username) {
+        return bloggerRepository.findByUsername(username);
+    }
+
 
 }

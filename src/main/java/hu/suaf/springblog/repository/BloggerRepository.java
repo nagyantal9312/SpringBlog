@@ -10,6 +10,4 @@ public interface BloggerRepository extends JpaRepository<Blogger, Long> {
     Blogger findByUsername(String username);
 
 
-
-
 }
