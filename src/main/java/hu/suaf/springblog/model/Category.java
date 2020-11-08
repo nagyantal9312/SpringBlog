@@ -1,7 +1,6 @@
 package hu.suaf.springblog.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,7 +8,8 @@ import javax.persistence.ManyToMany;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class Category {
 
     @Id
