@@ -21,6 +21,8 @@ public class Comment extends AuditableEntity<String> {
     @ManyToOne(fetch = FetchType.LAZY)
     private BlogPost blogPost;
 
+    @Transient
+    private Blogger commentCreator;
 
 
 }

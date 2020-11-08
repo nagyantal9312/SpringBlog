@@ -1,6 +1,7 @@
 package hu.suaf.springblog.controller;
 
 import hu.suaf.springblog.model.BlogPost;
+import hu.suaf.springblog.model.Blogger;
 import hu.suaf.springblog.model.Category;
 import hu.suaf.springblog.model.Comment;
 import hu.suaf.springblog.service.BlogPostService;
@@ -37,7 +38,7 @@ public class BlogPostController {
     public String viewBlogPost(Model model, @PathVariable long id){
         model.addAttribute("poszt", blogPostService.findBlogPostById(id));
         model.addAttribute("komment",new Comment());
-
+        model.addAttribute("valaki",new Blogger());
         return "post";
     }
 

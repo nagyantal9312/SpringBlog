@@ -48,10 +48,11 @@
 
 
 
-
+                <!--/*@thymesVar id="szerzo" type="hu.suaf.springblog.model.Blogger"*/-->
                 <!--/*@thymesVar id="comments" type="hu.suaf.springblog.model.Comment"*/-->
                 <div class="media mb-4" th:each="item : ${poszt.comments}">
                     <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+
                     <div class="media-body">
                         <h5 class="mt-1" th:text="${item.createdBy}">Commenter Name</h5>
                         <p th:text="${item.text}">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>

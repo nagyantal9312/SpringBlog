@@ -30,14 +30,29 @@ public class BloggerService {
         Role role = roleService.findByName("USER");
         blogger.setRoles(Arrays.asList(role));
         blogger.setPassword(passwordEncoder.encode(blogger.getPassword()));
-        System.out.println(blogger.toString());
         bloggerRepository.save(blogger);
     }
+
+    public void editBlogger(Blogger blogger) {
+
+        System.out.println("SSERVICE: " + blogger.getUsername() + blogger.getName() + blogger.getEmail() + blogger.getRoles() + blogger.getPassword() + blogger.getBirthDate());
+        blogger.setPassword(passwordEncoder.encode(blogger.getPassword()));
+        bloggerRepository.save(blogger);
+    }
+
 
 
     public Blogger findByUsername(String username) {
         return bloggerRepository.findByUsername(username);
     }
 
+
+  /*  public Blogger findByCommentId(long id) {
+        Blogger blogger = bloggerRepository.bloggerOfComment(id);
+        System.out.println(blogger.toString());
+        return blogger;
+
+    }
+*/
 
 }
