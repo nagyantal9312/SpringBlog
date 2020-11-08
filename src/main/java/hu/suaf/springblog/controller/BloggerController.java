@@ -11,10 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -59,12 +56,12 @@ public class BloggerController {
             return "/post-create";
         }
         blogPostService.saveBlogPost(blogPost);
-        return "redirect:/blogger/profile";
+        return "redirect:/blogger";
     }
 
 
-    @GetMapping("/profile")
-    public String createProfilePage(@AuthenticationPrincipal Blogger blogger, Model model) {
+    @GetMapping("/profile/{username}")
+    public String createProfilePage(@PathVariable String username, @AuthenticationPrincipal Blogger blogger, Model model) {
         model.addAttribute("loggedInBlogger", blogger);
         return "profile";
     }

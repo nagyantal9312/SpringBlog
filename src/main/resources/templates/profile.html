@@ -7,9 +7,9 @@
 
 
 
-
+<!--
     <div class="container">
-        <!--/*@thymesVar id="logged" type="hu.suaf.springblog.model.Blogger"*/-->
+        &lt;!&ndash;/*@thymesVar id="logged" type="hu.suaf.springblog.model.Blogger"*/&ndash;&gt;
         <div class="row" th:object="${loggedInBlogger}">
             <div class="col">
                 <img class="rounded float-left" alt="..." >
@@ -22,14 +22,103 @@
                 <span th:text="${loggedInBlogger.birthDate}"></span>
                 <span th:text="${loggedInBlogger.isEnabled()}"></span>
             </div>
+             </div>
+
+        </div>-->
 
 
+
+
+
+
+
+
+
+
+
+
+    <div class="container">
+        <div class="row my-2">
+            <div class="col-lg-8 order-lg-2">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
+                    </li>
+                </ul>
+                <div class="tab-content py-4">
+                    <div class="tab-pane active" id="profile">
+                        <h5 class="mb-3">User Profile</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p th:text="'Név: ' + ${loggedInBlogger.name}"></p>
+                                <p th:text="'Felhaszálónév: ' + ${loggedInBlogger.username}"></p>
+                                <p th:text="'Email: ' + ${loggedInBlogger.email}"></p>
+                                <p th:text="'Születési idő: ' + ${loggedInBlogger.birthDate}"></p>
+                                <p th:text="${loggedInBlogger.isEnabled()}"></p>
+                            </div>
+                        </div>
+                        <!--/row-->
+
+                    </div>
+
+                    <div class="tab-pane" id="edit">
+                        <form role="form">
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Real Name</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" type="text" th:value="${loggedInBlogger.name}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" type="email" th:value="${loggedInBlogger.email}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Password</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" type="password">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" type="password">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label"></label>
+                                <div class="col-lg-9">
+                                    <input type="reset" class="btn btn-secondary" value="Cancel">
+                                    <input type="button" class="btn btn-primary" value="Save Changes">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-lg-4 order-lg-1 text-center">
+                <img th:src="*{'data:image/png;base64,'+loggedInBlogger.photo}" src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+                <h6 class="mt-2">Upload a different photo</h6>
+                <label class="custom-file">
+                    <input type="file" id="file" class="custom-file-input">
+                    <span class="custom-file-control">Choose file</span>
+                </label>
+            </div>
         </div>
-
-
-
-
     </div>
+
+
+
+
+
 
 
 

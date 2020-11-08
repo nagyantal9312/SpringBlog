@@ -14,7 +14,7 @@
             <a class="nav-item nav-link" th:classappend="${current} == 'List Posts' ? 'active' : ''" href="#" th:href="@{/blogger}">List posts</a>
             <a class="nav-item nav-link" th:classappend="${current} == 'My Posts' ? 'active' : ''" href="#" th:href="@{/blogger}">My Posts</a>
             <a class="nav-item nav-link" th:classappend="${current} == 'New Post' ? 'active' : ''" href="#" th:href="@{/blogger/post-create}">New Post</a>
-            <a class="nav-item nav-link" sec:authentication="name" th:classappend="${current} == 'Profile' ? 'active' : ''" href="#" th:href="@{/blogger/profile}">Profile</a>
+            <a class="nav-item nav-link" sec:authentication="name" th:classappend="${current} == 'Profile' ? 'active' : ''" href="#" th:href="@{/blogger/profile/{username}(username=${#authentication.getName()})}">Profile</a>
 
 
         </div>

@@ -35,7 +35,6 @@ public class BlogPostController {
 
     @GetMapping("/{id}")
     public String viewBlogPost(Model model, @PathVariable long id){
-        System.out.println(blogPostService.findBlogPostById(id).toString());
         model.addAttribute("poszt", blogPostService.findBlogPostById(id));
         model.addAttribute("komment",new Comment());
 
@@ -47,9 +46,8 @@ public class BlogPostController {
     public String createComment(@PathVariable long id, Comment comment, BindingResult bindingResult){
         comment.setBlogPost(blogPostService.findBlogPostById(id));
 
-        System.out.println(comment.toString());
         commentService.saveComment(comment);
-        return "redirect:/" + id;
+        return "redirect:/blogpost/" + id;
     }
 
 
