@@ -40,8 +40,6 @@ public class AuthController {
         if(result.hasErrors()){
             return "register";
         }
-        System.out.println(blogger.toString());
-
         bloggerService.saveBlogger(blogger);
         return "redirect:/login";
     }

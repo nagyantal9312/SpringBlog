@@ -20,14 +20,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     PasswordEncoder passwordEncoder;
 
 
-
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        System.out.println("AZUSRENAME: " + username);
         Blogger blogger = bloggerRepository.findByUsername(username);
-        System.out.println("ALEALEALE " + blogger.toString());
         if(blogger == null) {
             throw new UsernameNotFoundException("Not able to find the user named: " + username);
         }

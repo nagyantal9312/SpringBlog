@@ -11,20 +11,55 @@
 
 
 <main th:object="${posztok}">
-    <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action" th:each="item : ${posztok}">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1" th:text="${item.title}">Cim</h5>
-                <small th:text="${item.createdDate}">Creationdate</small>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action" th:each="item : ${posztok}">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1" th:text="${item.title}">Cim</h5>
+                            <small th:text="${item.createdDate}">Creationdate</small>
+                        </div>
+                        <p class="mb-1" th:text="'Szerző: ' + ${item.createdBy}"></p>
+                        <small>Kategóriák:</small>
+                        <small th:each="elem : ${item.categories}">
+                            <span class="badge badge-primary" th:text="${elem.name}">Primary</span>
+                        </small>
+                    </a>
+                </div>
             </div>
-            <p>Szerző:</p>
-            <p class="mb-1" th:text="${item.createdBy}"></p>
-            <small>Kategóriák:</small>
-            <small th:each="elem : ${item.categories}">
-                <span class="badge badge-primary" th:text="${elem.name}">Primary</span>
-            </small>
-        </a>
+            <div class="col-md-4">
+                <!-- Search Widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Search</h5>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for...">
+                            <span class="input-group-append">
+                <button class="btn btn-secondary" type="button">Go!</button>
+              </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
 </main>
 
 
