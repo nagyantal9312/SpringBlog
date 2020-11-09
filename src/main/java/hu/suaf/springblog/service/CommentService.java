@@ -20,7 +20,9 @@ public class CommentService {
         commentRepository.save(comment);
     }
 
-
+    public void deleteComment(long id) {
+        commentRepository.deleteById(id);
+    }
 
 
 

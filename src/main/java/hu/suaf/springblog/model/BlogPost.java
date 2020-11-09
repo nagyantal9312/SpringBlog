@@ -18,15 +18,12 @@ public class BlogPost extends AuditableEntity<String>{
     private String text;
 
 
-   /* @ManyToOne(fetch = FetchType.LAZY)
-    private Blogger author;*/
-
 
     @ManyToMany
     private List<Category> categories;
 
 
-    @OneToMany(mappedBy = "blogPost")
+    @OneToMany(mappedBy = "blogPost", cascade= CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
 
     @Transient

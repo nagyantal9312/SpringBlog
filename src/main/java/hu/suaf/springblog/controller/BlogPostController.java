@@ -58,6 +58,12 @@ public class BlogPostController {
         return "redirect:/blogger";
     }
 
+    @GetMapping("/comment/delete/{id}")
+    public String deleteComment(@PathVariable long id){
+        commentService.deleteComment(id);
+        return "redirect:/blogpost/" + id;
+    }
+
 
 
 }

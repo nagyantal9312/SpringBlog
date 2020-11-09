@@ -30,13 +30,6 @@ public class Blogger extends AuditableEntity<String> implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles;
 
-   /* @OneToMany()
-    private List<BlogPost> blogPosts;*/
-
-    /*@OneToMany(mappedBy = "author")
-    private List<Comment> comments;*/
-
-
 
 
     @Override
