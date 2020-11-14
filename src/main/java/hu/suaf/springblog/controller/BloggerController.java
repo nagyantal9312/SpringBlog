@@ -73,7 +73,6 @@ public class BloggerController {
     @PostMapping("/profile/{username}")
     public String editProfile(@PathVariable String username, Blogger blogger, Model model){
         blogger.setPhoto(bloggerService.findByUsername(username).getPhoto());
-        System.out.println("ITTVANBAZMEG: " + username);
         bloggerService.editBlogger(blogger);
 
         return "redirect:/blogger/profile/" + username;

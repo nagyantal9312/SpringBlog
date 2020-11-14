@@ -49,7 +49,6 @@ public class BlogPostService {
 
     public BlogPost findBlogPostById(long id) {
 
-        System.out.println(blogPostRepository.findById(id).toString() + " ALALA " + id);
         BlogPost blogPost = blogPostRepository.findById(id).orElse(null);
         /*for(Comment item : blogPost.getComments()){
             item.setCommentCreator(bloggerRepository.bloggerOfComment(id));
