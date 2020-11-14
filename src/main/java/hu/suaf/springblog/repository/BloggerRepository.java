@@ -12,12 +12,4 @@ public interface BloggerRepository extends JpaRepository<Blogger, Long> {
 
     Blogger findByUsername(String username);
 
-
-
-
-    /*@Query("SELECT b from Blogger b join Comment c where b.username = c.createdBy and c.id = :kid ")
-    Blogger bloggerOfComment(@Param("kid") long id);
-*/
-
-
 }

@@ -35,7 +35,7 @@ public class BloggerService {
 
     public void editBlogger(Blogger blogger) {
 
-        System.out.println("SSERVICE: " + blogger.getUsername() + blogger.getName() + blogger.getEmail() + blogger.getRoles() + blogger.getPassword() + blogger.getBirthDate());
+        //System.out.println("SSERVICE: " + blogger.getUsername() + blogger.getName() + blogger.getEmail() + blogger.getRoles() + blogger.getPassword() + blogger.getBirthDate());
         blogger.setPassword(passwordEncoder.encode(blogger.getPassword()));
         bloggerRepository.save(blogger);
     }
@@ -47,12 +47,5 @@ public class BloggerService {
     }
 
 
-  /*  public Blogger findByCommentId(long id) {
-        Blogger blogger = bloggerRepository.bloggerOfComment(id);
-        System.out.println(blogger.toString());
-        return blogger;
-
-    }
-*/
 
 }

@@ -22,7 +22,7 @@ public class Comment extends AuditableEntity<String> {
     private BlogPost blogPost;
 
     @Transient
-    private Blogger commentCreator;
+    private String photoHelper;
 
 
 }

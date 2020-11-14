@@ -38,7 +38,6 @@ public class BlogPostController {
     public String viewBlogPost(Model model, @PathVariable long id){
         model.addAttribute("poszt", blogPostService.findBlogPostById(id));
         model.addAttribute("komment",new Comment());
-        model.addAttribute("valaki",new Blogger());
         return "post";
     }
 

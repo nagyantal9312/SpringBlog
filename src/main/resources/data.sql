@@ -26,3 +26,4 @@ INSERT INTO COMMENT(text,blog_post_id) VALUES('Masodik komment', '1');
 INSERT INTO COMMENT(text,blog_post_id) VALUES('Harmadik komment', '1');
 INSERT INTO COMMENT(text,blog_post_id) VALUES('Negyedik komment',  '2');*/
 
+INSERT INTO COMMENT(text,blog_post_id,created_by) VALUES('Elso komment','1','bela89');

@@ -7,6 +7,7 @@ import hu.suaf.springblog.model.Comment;
 import hu.suaf.springblog.repository.BlogPostRepository;
 import hu.suaf.springblog.repository.BloggerRepository;
 import hu.suaf.springblog.repository.CategoryRepository;
+import hu.suaf.springblog.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +21,14 @@ public class BlogPostService {
     private BlogPostRepository blogPostRepository;
     private CategoryRepository categoryRepository;
     private BloggerRepository bloggerRepository;
+    private CommentRepository commentRepository;
 
     @Autowired
-    public BlogPostService(BlogPostRepository blogPostRepository, CategoryRepository categoryRepository, BloggerRepository bloggerRepository) {
+    public BlogPostService(BlogPostRepository blogPostRepository, CategoryRepository categoryRepository, BloggerRepository bloggerRepository, CommentRepository commentRepository) {
         this.blogPostRepository = blogPostRepository;
         this.categoryRepository = categoryRepository;
         this.bloggerRepository = bloggerRepository;
+        this.commentRepository = commentRepository;
     }
 
     public void saveBlogPost(BlogPost b){
@@ -50,11 +53,11 @@ public class BlogPostService {
     public BlogPost findBlogPostById(long id) {
 
         BlogPost blogPost = blogPostRepository.findById(id).orElse(null);
-        /*for(Comment item : blogPost.getComments()){
-            item.setCommentCreator(bloggerRepository.bloggerOfComment(id));
-            System.out.println(item.getCommentCreator().getUsername());
+        for(Comment item : blogPost.getComments()) {
+            Blogger blogger = bloggerRepository.findByUsername(item.getCreatedBy());
+            item.setPhotoHelper(blogger.getPhoto());
         }
-*/
+
         return blogPost;
     }
 
