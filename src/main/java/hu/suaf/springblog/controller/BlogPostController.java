@@ -27,9 +27,10 @@ public class BlogPostController {
     private CommentService commentService;
 
     @Autowired
-    public BlogPostController(BlogPostService blogPostService, CommentService commentService) {
+    public BlogPostController(BlogPostService blogPostService, CommentService commentService, CategoryService categoryService) {
         this.blogPostService = blogPostService;
         this.commentService = commentService;
+        this.categoryService = categoryService;
 
 
     }
@@ -51,6 +52,30 @@ public class BlogPostController {
     }
 
 
+    @GetMapping("/edit/{id}")
+    public String editBlogPostForm(@PathVariable long id, Model model){
+        BlogPost blogPost = blogPostService.findBlogPostById(id);
+        model.addAttribute("kategoriak", categoryService.listCategories());
+        model.addAttribute("blogPost",blogPost);
+        return "post-create";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editBlogPost(@PathVariable long id, Model model, BlogPost blogPost){
+        blogPostService.saveBlogPost(blogPost);
+        return "redirect:/blogpost/" + id;
+    }
+
+
+    /*@PostMapping("/{id}")
+    public String editComment(@PathVariable long id, Comment comment, BindingResult bindingResult){
+        comment.setBlogPost(blogPostService.findBlogPostById(id));
+
+        commentService.saveComment(comment);
+        return "redirect:/blogpost/" + id;
+    }*/
+
+
     @GetMapping("/delete/{id}")
     public String deleteBlogPost(@PathVariable long id){
         blogPostService.deleteBlogPost(id);
@@ -61,6 +86,19 @@ public class BlogPostController {
     public String deleteComment(@PathVariable long id){
         commentService.deleteComment(id);
         return "redirect:/blogpost/" + id;
+    }
+
+    @GetMapping("/comment/edit/{id}")
+    public String editCommentForm(@PathVariable long id, Model model){
+        Comment comment = commentService.findCommentById(id);
+        model.addAttribute("komment",comment);
+        return "comment-edit";
+    }
+
+    @PostMapping("/comment/edit/{id}")
+    public String editComment(@PathVariable long id, Model model, Comment comment){
+        commentService.saveComment(comment);
+        return "redirect:/blogger";
     }
 
 

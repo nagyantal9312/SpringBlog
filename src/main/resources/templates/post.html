@@ -60,7 +60,7 @@
                         <div class="d-flex w-100 justify-content-between">
                             <small th:text="${item.createdDate}" >Creationdate</small>
                             <div>
-                                <a href="#">
+                                <a href="#" th:href="@{/blogpost/comment/edit/{id}(id=${item.id})}">
                                     <img class="logo" th:src="@{/images/updateIcon.svg}">
                                 </a>
                                 <a href="#" th:href="@{/blogpost/comment/delete/{id}(id=${item.id})}">
@@ -102,7 +102,7 @@
                 <div class="card my-4">
                     <h5 class="card-header">Action</h5>
                     <div class="card-body">
-                        <a href="#" >
+                        <a href="#" th:href="@{/blogpost/edit/{id}(id=${poszt.id})}">
                             <button class="btn btn-outline-primary">Módosítás
                                 <img th:src="@{/images/updateIcon.svg}">
                             </button>

@@ -5,6 +5,7 @@ import hu.suaf.springblog.model.Blogger;
 import hu.suaf.springblog.service.BlogPostService;
 import hu.suaf.springblog.service.BloggerService;
 import hu.suaf.springblog.service.CategoryService;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -13,9 +14,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.Converter;
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 
 @Controller
@@ -78,15 +84,20 @@ public class BloggerController {
         return "redirect:/blogger/profile/" + username;
     }
 
+    @PostMapping("/profile/photo/{username}")
+    public String editPhoto(@PathVariable String username, @RequestParam("image") MultipartFile image, Model model){
 
+        Blogger blogger = bloggerService.findByUsername(username);
+        bloggerService.uploadPhoto(blogger,image);
+
+        return "redirect:/blogger/profile/" + username;
+    }
 
 
     @InitBinder
     public void initBinder(WebDataBinder binder){
         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
     }
-
-
 
 
 

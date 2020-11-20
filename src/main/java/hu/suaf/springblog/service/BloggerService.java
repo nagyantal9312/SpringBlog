@@ -6,8 +6,11 @@ import hu.suaf.springblog.repository.BloggerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.Base64;
 
 @Service
 public class BloggerService {
@@ -37,6 +40,22 @@ public class BloggerService {
 
         //System.out.println("SSERVICE: " + blogger.getUsername() + blogger.getName() + blogger.getEmail() + blogger.getRoles() + blogger.getPassword() + blogger.getBirthDate());
         blogger.setPassword(passwordEncoder.encode(blogger.getPassword()));
+        bloggerRepository.save(blogger);
+    }
+
+    public void uploadPhoto(Blogger blogger, MultipartFile image) {
+
+        byte[] fileContent = new byte[0];
+        try {
+            fileContent = image.getBytes();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String encodedString = Base64
+                .getEncoder()
+                .encodeToString(fileContent);
+
+        blogger.setPhoto(encodedString);
         bloggerRepository.save(blogger);
     }
 

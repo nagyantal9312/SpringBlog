@@ -108,10 +108,23 @@
             <div class="col-lg-4 order-lg-1 text-center">
                 <img th:src="*{'data:image/png;base64,'+ezegyBlogger.photo}" src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">
                 <h6 class="mt-2">Upload a different photo</h6>
-                <label class="custom-file">
-                    <input type="file" id="file" class="custom-file-input">
-                    <span class="custom-file-control">Choose file</span>
-                </label>
+                    <form enctype="multipart/form-data" method="post" th:action="@{/blogger/profile/photo/{username}(username=${ezegyBlogger.username})}">
+                        <div>
+                            <label class="custom-file" for="image">
+                                <input class="btn" accept="image/png, image/jpeg" type="file" id="image" name="image" >
+                            </label>
+                        </div>
+                        <div>
+
+                            <button type="submit" class="btn btn-primary">
+                                <img th:src="@{/images/uploadIcon.svg}">
+                                Upload Image</button>
+                        </div>
+                    </form>
+
+
+
+
             </div>
         </div>
     </div>
