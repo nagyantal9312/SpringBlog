@@ -66,5 +66,9 @@ public class BlogPostService {
 
     }
 
+    public List<BlogPost> searchBlogPostByTitle(String title) {
+        return blogPostRepository.findAllByTitleContainingOrderByLastModifiedDateDesc(title);
+    }
+
 
 }

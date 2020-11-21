@@ -40,11 +40,25 @@ public class BloggerController {
         this.bloggerService = bloggerService;
     }
 
+/*
+
+    @GetMapping("")
+    public String listBlogPostsByCategory(Model model,@RequestParam("cim") String title){
+        System.out.println(title);
+       model.addAttribute("posztok", blogPostService.listBlogPosts());
+        return "home";
+    }
+*/
 
 
     @GetMapping("")
-    public String listBlogPosts_get(Model model){
-        model.addAttribute("posztok", blogPostService.listBlogPosts());
+    public String listBlogPosts_get(Model model,@RequestParam(value = "cim", required = false) String title){
+
+        if(title == null){
+            model.addAttribute("posztok", blogPostService.listBlogPosts());
+        }else{
+            model.addAttribute("posztok", blogPostService.searchBlogPostByTitle(title.strip()));
+        }
         return "home";
     }
 
@@ -98,6 +112,8 @@ public class BloggerController {
     public void initBinder(WebDataBinder binder){
         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
     }
+
+
 
 
 

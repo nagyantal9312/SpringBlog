@@ -10,5 +10,8 @@ import java.util.List;
 public interface BlogPostRepository extends JpaRepository<BlogPost, Long> {
 
     List<BlogPost> findAllByOrderByLastModifiedDateDesc();
+    List<BlogPost> findAllByTitleContainingOrderByLastModifiedDateDesc(String title);
+
+
 
 }
