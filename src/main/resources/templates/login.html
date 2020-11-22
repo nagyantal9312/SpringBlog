@@ -4,6 +4,11 @@
     <div th:replace="fragments/header :: header (title='Login')"></div>
 
     <body>
+    <div th:replace="fragments/menu :: menu(current='Login')"></div>
+
+
+
+
         <div class="container">
             <!--/*@thymesVar id="blogger" type="hu.suaf.springblog.model.Blogger"*/-->
             <form action="#" th:action="@{/login}" th:object="${blogger}" method="post">
