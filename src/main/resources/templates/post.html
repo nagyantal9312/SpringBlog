@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
 <div th:replace="fragments/header :: header (title='Read post')"></div>
 
 <body>
@@ -13,7 +13,8 @@
         <div class="row" >
             <div class="col-lg-8">
                 <h1 th:text="${poszt.title}">Cim</h1>
-                <p class="lead" th:text="#{author} + ':'">Szerző:
+                <p class="lead" >
+                    <label th:text="#{author} + ':'"></label>
                     <a href="#" th:href="@{/blogger/profile/{username}(username=${poszt.createdBy})}" th:text="${poszt.createdBy}">szerzőneve</a>
                 </p>
                 <hr>
@@ -27,7 +28,7 @@
 
 
                 <!--/*@thymesVar id="komment" type="hu.suaf.springblog.model.Comment"*/-->
-                <div class="card my-4">
+                <div class="card my-4" sec:authorize="isAuthenticated()">
                     <h5 class="card-header" th:text="#{leave_a_comment} + ':'">Leave a Comment:</h5>
                     <div class="card-body">
                         <form th:object="${komment}" th:action="@{/blogpost/{id}(id=${poszt.id})}" method="post">
@@ -55,7 +56,10 @@
 
 
                     <div class="media-body">
-                        <h5 class="mt-1" th:text="${item.createdBy}">Commenter Name</h5>
+                        <h5 class="mt-1" >
+                            <a th:href="@{/blogger/profile/{username}(username=${item.createdBy})}" th:text="${item.createdBy}"></a>
+
+                        </h5>
                         <p th:text="${item.text}">Comment Text</p>
                         <div class="d-flex w-100 justify-content-between">
                             <small th:text="${item.createdDate}" >Creationdate</small>

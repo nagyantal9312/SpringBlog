@@ -1,30 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security" >
 <div th:replace="fragments/header :: header (title='Profile')"></div>
 
 <body>
     <div th:replace="fragments/menu :: menu(current='Profile')"></div>
 
 
-
-<!--
-    <div class="container">
-        &lt;!&ndash;/*@thymesVar id="logged" type="hu.suaf.springblog.model.Blogger"*/&ndash;&gt;
-        <div class="row" th:object="${loggedInBlogger}">
-            <div class="col">
-                <img class="rounded float-left" alt="..." >
-                <input type="file">
-            </div>
-            <div class="col">
-                <span th:text="${loggedInBlogger.name}"></span>
-                <span th:text="${loggedInBlogger.username}"></span>
-                <span th:text="${loggedInBlogger.email}"></span>
-                <span th:text="${loggedInBlogger.birthDate}"></span>
-                <span th:text="${loggedInBlogger.isEnabled()}"></span>
-            </div>
-             </div>
-
-        </div>-->
 
 
 
@@ -45,7 +26,7 @@
                         <a href="" data-target="#profile" data-toggle="tab" class="nav-link active" th:text="#{profile}">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" data-target="#edit" data-toggle="tab" class="nav-link" th:text="#{edit}">Edit</a>
+                        <a href="" data-target="#edit" data-toggle="tab" class="nav-link" th:text="#{edit}" th:if="${ezegyBlogger.username} == ${#authentication.getName()}">Edit</a>
                     </li>
                 </ul>
                 <div class="tab-content py-4">
@@ -64,8 +45,9 @@
 
                     </div>
 
-                    <div class="tab-pane" id="edit">
 
+
+                    <div class="tab-pane" id="edit" >
                         <form role="form" th:object="${ezegyBlogger}" th:action="@{/blogger/profile/{username}(username=${ezegyBlogger.username})}" method="post">
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label" th:text="#{realname}">Real Name</label>
@@ -107,7 +89,9 @@
 
             <div class="col-lg-4 order-lg-1 text-center">
                 <img th:src="*{'data:image/png;base64,'+ezegyBlogger.photo}" src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">
-                <h6 class="mt-2" th:text="#{upload_a_different_photo}">Upload a different photo</h6>
+
+                <div th:if="${ezegyBlogger.username} == ${#authentication.getName()}">
+                    <h6 class="mt-2" th:text="#{upload_a_different_photo}">Upload a different photo</h6>
                     <form enctype="multipart/form-data" method="post" th:action="@{/blogger/profile/photo/{username}(username=${ezegyBlogger.username})}">
                         <div>
                             <label class="custom-file" for="image">
@@ -121,10 +105,7 @@
                             </button>
                         </div>
                     </form>
-
-
-
-
+                </div>
             </div>
         </div>
     </div>
