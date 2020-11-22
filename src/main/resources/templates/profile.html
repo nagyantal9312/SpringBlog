@@ -42,21 +42,21 @@
             <div class="col-lg-8 order-lg-2">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
+                        <a href="" data-target="#profile" data-toggle="tab" class="nav-link active" th:text="#{profile}">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
+                        <a href="" data-target="#edit" data-toggle="tab" class="nav-link" th:text="#{edit}">Edit</a>
                     </li>
                 </ul>
                 <div class="tab-content py-4">
                     <div class="tab-pane active" id="profile">
-                        <h5 class="mb-3">User Profile</h5>
+                        <h5 class="mb-3" th:text="#{user_profile}">User Profile</h5>
                         <div class="row">
                             <div class="col-md-6">
-                                <p th:text="'Név: ' + ${ezegyBlogger.name}"></p>
-                                <p th:text="'Felhasználónév: ' + ${ezegyBlogger.username}"></p>
-                                <p th:text="'Email: ' + ${ezegyBlogger.email}"></p>
-                                <p th:text="'Születési idő: ' + ${ezegyBlogger.birthDate}"></p>
+                                <p th:text="#{realname} + ': ' + ${ezegyBlogger.name}"></p>
+                                <p th:text="#{username} + ': ' + ${ezegyBlogger.username}"></p>
+                                <p th:text="#{email} + ': ' + ${ezegyBlogger.email}"></p>
+                                <p th:text="#{birthdate} + ': ' + ${ezegyBlogger.birthDate}"></p>
                                 <p th:text="${ezegyBlogger.isEnabled()}"></p>
                             </div>
                         </div>
@@ -68,25 +68,25 @@
 
                         <form role="form" th:object="${ezegyBlogger}" th:action="@{/blogger/profile/{username}(username=${ezegyBlogger.username})}" method="post">
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Real Name</label>
+                                <label class="col-lg-3 col-form-label form-control-label" th:text="#{realname}">Real Name</label>
                                 <div class="col-lg-9">
                                     <input class="form-control" type="text" th:field="${ezegyBlogger.name}" th:value="${ezegyBlogger.name}">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                                <label class="col-lg-3 col-form-label form-control-label" th:text="#{email}">Email</label>
                                 <div class="col-lg-9">
                                     <input class="form-control" type="email" th:field="${ezegyBlogger.email}" th:value="${ezegyBlogger.email}">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Password</label>
+                                <label class="col-lg-3 col-form-label form-control-label" th:text="#{password}">Password</label>
                                 <div class="col-lg-9">
                                     <input class="form-control" type="password" th:field="${ezegyBlogger.password}" th:autocomplete="off">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
+                                <label class="col-lg-3 col-form-label form-control-label" th:text="#{confirm_password}">Confirm password</label>
                                 <div class="col-lg-9">
                                     <input class="form-control" type="password">
                                 </div>
@@ -94,8 +94,8 @@
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label"></label>
                                 <div class="col-lg-9">
-                                    <input type="reset" class="btn btn-secondary" value="Cancel">
-                                    <input type="submit" class="btn btn-primary" value="Save Changes">
+                                    <button type="reset" class="btn btn-secondary" value="Cancel" th:text="#{cancel}"></button>
+                                        <button type="submit" class="btn btn-primary" value="Save Changes" th:text="#{save}"></button>
                                 </div>
                             </div>
                         </form>
@@ -107,7 +107,7 @@
 
             <div class="col-lg-4 order-lg-1 text-center">
                 <img th:src="*{'data:image/png;base64,'+ezegyBlogger.photo}" src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">
-                <h6 class="mt-2">Upload a different photo</h6>
+                <h6 class="mt-2" th:text="#{upload_a_different_photo}">Upload a different photo</h6>
                     <form enctype="multipart/form-data" method="post" th:action="@{/blogger/profile/photo/{username}(username=${ezegyBlogger.username})}">
                         <div>
                             <label class="custom-file" for="image">
@@ -117,8 +117,8 @@
                         <div>
 
                             <button type="submit" class="btn btn-primary">
-                                <img th:src="@{/images/uploadIcon.svg}">
-                                Upload Image</button>
+                                <img th:src="@{/images/uploadIcon.svg}"><small th:text="#{upload_image}"></small>
+                            </button>
                         </div>
                     </form>
 

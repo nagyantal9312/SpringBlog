@@ -10,11 +10,11 @@
     <!--/*@thymesVar id="komment" type="hu.suaf.springblog.model.Comment"*/-->
     <form action="#" method="post" th:action="@{/blogpost/comment/edit/{id}(id=${komment.id})}" th:object="${komment}">
         <div class="form-group">
-            <label for="commentText">Szöveg</label>
+            <label for="commentText" th:text="#{text}">Szöveg</label>
             <input type="text" class="form-control" id="commentText" th:field="*{text}" >
             <span class="validationError" ></span>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" th:text="#{submit}">Submit</button>
     </form>
 </div>
 

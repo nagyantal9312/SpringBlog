@@ -13,7 +13,7 @@
         <div class="row" >
             <div class="col-lg-8">
                 <h1 th:text="${poszt.title}">Cim</h1>
-                <p class="lead">Szerző:
+                <p class="lead" th:text="#{author} + ':'">Szerző:
                     <a href="#" th:href="@{/blogger/profile/{username}(username=${poszt.createdBy})}" th:text="${poszt.createdBy}">szerzőneve</a>
                 </p>
                 <hr>
@@ -28,13 +28,13 @@
 
                 <!--/*@thymesVar id="komment" type="hu.suaf.springblog.model.Comment"*/-->
                 <div class="card my-4">
-                    <h5 class="card-header">Leave a Comment:</h5>
+                    <h5 class="card-header" th:text="#{leave_a_comment} + ':'">Leave a Comment:</h5>
                     <div class="card-body">
                         <form th:object="${komment}" th:action="@{/blogpost/{id}(id=${poszt.id})}" method="post">
                             <div class="form-group">
                                 <textarea class="form-control" rows="3" th:field="*{text}"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" th:text="#{submit}">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
             <div class="col-md-4">
                 <!-- Categories Widget -->
                 <div class="card my-4">
-                    <h5 class="card-header">Categories</h5>
+                    <h5 class="card-header" th:text="#{categories}">Categories</h5>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-6">
@@ -101,16 +101,16 @@
                 </div>
 
                 <div class="card my-4">
-                    <h5 class="card-header">Action</h5>
+                    <h5 class="card-header" th:text="#{action}">Action</h5>
                     <div class="card-body">
                         <a href="#" th:href="@{/blogpost/edit/{id}(id=${poszt.id})}">
-                            <button class="btn btn-outline-primary">Módosítás
-                                <img th:src="@{/images/updateIcon.svg}">
+                            <button class="btn btn-outline-primary">
+                                <img th:src="@{/images/updateIcon.svg}"><small th:text="#{edit}"></small>
                             </button>
                         </a>
                         <a href="#" th:href="@{/blogpost/delete/{id}(id=${poszt.id})}">
-                            <button class="btn btn-outline-primary">Törlés
-                                <img th:src="@{/images/deleteIcon.svg}">
+                            <button class="btn btn-outline-primary" >
+                                <img th:src="@{/images/deleteIcon.svg}"><small th:text="#{delete}"></small>
                             </button>
                         </a>
 

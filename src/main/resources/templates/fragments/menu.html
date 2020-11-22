@@ -11,16 +11,15 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
 
-            <a class="nav-item nav-link" th:classappend="${current} == 'List Posts' ? 'active' : ''" href="#" th:href="@{/blogger}">List posts</a>
-            <a class="nav-item nav-link" th:classappend="${current} == 'My Posts' ? 'active' : ''" href="#" th:href="@{/blogger}">My Posts</a>
-            <a class="nav-item nav-link" th:classappend="${current} == 'New Post' ? 'active' : ''" href="#" th:href="@{/blogger/post-create}">New Post</a>
-            <a class="nav-item nav-link" sec:authentication="name" th:classappend="${current} == 'Profile' ? 'active' : ''" href="#" th:href="@{/blogger/profile/{username}(username=${#authentication.getName()})}">Profile</a>
+            <a class="nav-item nav-link" th:classappend="${current} == 'List Posts' ? 'active' : ''" href="#" th:href="@{/blogger}" th:text="#{listposts}">List posts</a>
+            <a class="nav-item nav-link" th:classappend="${current} == 'New Post' ? 'active' : ''" href="#" th:href="@{/blogger/post-create}" th:text="#{newpost}">New Post</a>
+            <a class="nav-item nav-link" sec:authentication="name" th:classappend="${current} == 'Profile' ? 'active' : ''" href="#" th:href="@{/blogger/profile/{username}(username=${#authentication.getName()})}" >Profile</a>
 
 
         </div>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-item nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+                <a class="nav-item nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" th:text="#{logout}">Logout</a>
             </li>
         </ul>
     </div>
