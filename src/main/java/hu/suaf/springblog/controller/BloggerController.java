@@ -14,6 +14,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -84,7 +85,14 @@ public class BloggerController {
     }
 
     @PostMapping("/profile/{username}")
-    public String editProfile(@PathVariable String username, Blogger blogger, Model model){
+    public String editProfile(@PathVariable String username, @Valid Blogger blogger, Model model, BindingResult result){
+        if(result.hasErrors()){
+            //return "profile";
+            return "redirect:/blogger/profile/" + username;
+        }
+        if(blogger.getPassword() == null || blogger.getPassword().isEmpty()) {
+            blogger.setPassword(bloggerService.findByUsername(username).getPassword());
+        }
         blogger.setPhoto(bloggerService.findByUsername(username).getPhoto());
         bloggerService.editBlogger(blogger);
 

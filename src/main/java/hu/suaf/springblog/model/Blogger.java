@@ -7,6 +7,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -17,16 +21,31 @@ import java.util.List;
 public class Blogger extends AuditableEntity<String> implements UserDetails {
 
     @Id
+    @NotNull
+    @NotEmpty
     private String username;
+
+    @Email
+    @NotNull
+    @NotEmpty
     private String email;
+
+    @NotNull
+    @NotEmpty
     private String password;
+
+    @NotNull
+    @NotEmpty
     private String name;
 
     @Column(columnDefinition = "LONGTEXT")
     private String photo;
+
+    @PastOrPresent
     private Date birthDate;
 
     private boolean enabled;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles;
 

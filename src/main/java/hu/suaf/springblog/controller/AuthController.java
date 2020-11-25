@@ -9,6 +9,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
+
 @Controller
 public class AuthController {
 
@@ -36,7 +38,7 @@ public class AuthController {
 
 
     @PostMapping("/register")
-    public String registerBlogger(Blogger blogger, BindingResult result){
+    public String registerBlogger(@Valid Blogger blogger, BindingResult result){
         if(result.hasErrors()){
             return "register";
         }
