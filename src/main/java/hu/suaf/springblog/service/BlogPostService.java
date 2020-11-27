@@ -41,6 +41,8 @@ public class BlogPostService {
         }
         b.setCategories(c);
         b.setCategoryHelper(null);
+        //biztositja hogy a cim elso betuje nagybetus legyen
+        b.setTitle(b.getTitle().substring(0,1).toUpperCase() + b.getTitle().substring(1));
         blogPostRepository.save(b);
     }
 

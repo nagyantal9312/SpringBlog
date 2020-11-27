@@ -19,7 +19,7 @@
                     <a href="#" class="list-group-item list-group-item-action" th:each="item : ${posztok}" th:href="@{/blogpost/{id}(id=${item.id})}">
                         <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1" th:text="${item.title}">Cim</h5>
-                            <small th:text="${item.createdDate}">Creationdate</small>
+                            <small th:text="${#dates.format(item.createdDate, 'yyyy-MM-dd HH:mm')}">Creationdate</small>
                         </div>
                         <p class="mb-1" th:text="#{author} + ': ' + ${item.createdBy}"></p>
                         <small th:text="#{categories}">Kategóriák:</small>

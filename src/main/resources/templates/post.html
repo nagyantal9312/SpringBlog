@@ -18,7 +18,7 @@
                     <a href="#" th:href="@{/blogger/profile/{username}(username=${poszt.createdBy})}" th:text="${poszt.createdBy}">szerzőneve</a>
                 </p>
                 <hr>
-                    <p th:text="${poszt.createdDate}">posztolás ideje</p>
+                    <p th:text="${#dates.format(poszt.createdDate, 'yyyy-MM-dd HH:mm')}">posztolás ideje</p>
                 <hr>
                 <p class="lead" th:text="${poszt.text}">poszt szoveg</p>
                 <hr>
@@ -62,7 +62,7 @@
                         </h5>
                         <p th:text="${item.text}">Comment Text</p>
                         <div class="d-flex w-100 justify-content-between">
-                            <small th:text="${item.createdDate}" >Creationdate</small>
+                            <small th:text="${#dates.format(item.createdDate, 'yyyy-MM-dd HH:mm:ss')}" >Creationdate</small>
                             <div>
                                 <a href="#" th:href="@{/blogpost/comment/edit/{id}(id=${item.id})}">
                                     <img class="logo" th:src="@{/images/updateIcon.svg}">
