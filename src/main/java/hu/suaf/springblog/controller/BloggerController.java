@@ -69,7 +69,7 @@ public class BloggerController {
     }
 
     @PostMapping("/post-create")
-    public String createBlogPost(Model model, BlogPost blogPost, BindingResult bindingResult){
+    public String createBlogPost(BlogPost blogPost, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "/post-create";
         }
@@ -85,22 +85,21 @@ public class BloggerController {
     }
 
     @PostMapping("/profile/{username}")
-    public String editProfile(@PathVariable String username, @Valid Blogger blogger, Model model, BindingResult result){
+    public String editProfile(@PathVariable String username, @Valid Blogger blogger, BindingResult result){
         if(result.hasErrors()){
-            //return "profile";
-            return "redirect:/blogger/profile/" + username;
+
+            return "profile";
         }
-        if(blogger.getPassword() == null || blogger.getPassword().isEmpty()) {
-            blogger.setPassword(bloggerService.findByUsername(username).getPassword());
-        }
-        blogger.setPhoto(bloggerService.findByUsername(username).getPhoto());
         bloggerService.editBlogger(blogger);
 
         return "redirect:/blogger/profile/" + username;
     }
 
+
+
+
     @PostMapping("/profile/photo/{username}")
-    public String editPhoto(@PathVariable String username, @RequestParam("image") MultipartFile image, Model model){
+    public String editPhoto(@PathVariable String username, @RequestParam("image") MultipartFile image){
 
         Blogger blogger = bloggerService.findByUsername(username);
         bloggerService.uploadPhoto(blogger,image);

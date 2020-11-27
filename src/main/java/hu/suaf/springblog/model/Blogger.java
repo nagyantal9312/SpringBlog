@@ -2,15 +2,13 @@ package hu.suaf.springblog.model;
 
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -21,27 +19,24 @@ import java.util.List;
 public class Blogger extends AuditableEntity<String> implements UserDetails {
 
     @Id
-    @NotNull
-    @NotEmpty
+    @NotBlank
     private String username;
 
     @Email
-    @NotNull
-    @NotEmpty
+    @NotBlank
     private String email;
 
     @NotNull
-    @NotEmpty
     private String password;
 
-    @NotNull
-    @NotEmpty
+    @NotBlank
     private String name;
 
     @Column(columnDefinition = "LONGTEXT")
     private String photo;
 
     @PastOrPresent
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
     private Date birthDate;
 
     private boolean enabled;
@@ -81,4 +76,6 @@ public class Blogger extends AuditableEntity<String> implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }

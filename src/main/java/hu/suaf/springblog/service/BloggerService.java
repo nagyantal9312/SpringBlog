@@ -3,11 +3,13 @@ package hu.suaf.springblog.service;
 import hu.suaf.springblog.model.Blogger;
 import hu.suaf.springblog.model.Role;
 import hu.suaf.springblog.repository.BloggerRepository;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Base64;
@@ -27,7 +29,22 @@ public class BloggerService {
         this.roleService = roleService;
     }
 
-    public void saveBlogger(Blogger blogger) {
+    public void registerBlogger(Blogger blogger) {
+
+        File file = new File("src/main/resources/static/images/defaultprofile.png");
+
+        byte[] fileContent = new byte[0];
+        try {
+            fileContent = FileUtils.readFileToByteArray(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String encodedString = Base64
+                .getEncoder()
+                .encodeToString(fileContent);
+
+        blogger.setPhoto(encodedString);
+
 
         blogger.setEnabled(true);
         Role role = roleService.findByName("USER");
@@ -36,12 +53,21 @@ public class BloggerService {
         bloggerRepository.save(blogger);
     }
 
+
     public void editBlogger(Blogger blogger) {
 
         //System.out.println("SSERVICE: " + blogger.getUsername() + blogger.getName() + blogger.getEmail() + blogger.getRoles() + blogger.getPassword() + blogger.getBirthDate());
-        blogger.setPassword(passwordEncoder.encode(blogger.getPassword()));
+        Blogger bg = bloggerRepository.findByUsername(blogger.getUsername());
+        blogger.setPhoto(bg.getPhoto());
+        if(blogger.getPassword() == null || blogger.getPassword().isEmpty()) {
+            blogger.setPassword(bg.getPassword());
+        }else{
+            blogger.setPassword(passwordEncoder.encode(blogger.getPassword()));
+        }
         bloggerRepository.save(blogger);
     }
+
+
 
     public void uploadPhoto(Blogger blogger, MultipartFile image) {
 

@@ -42,7 +42,7 @@ public class AuthController {
         if(result.hasErrors()){
             return "register";
         }
-        bloggerService.saveBlogger(blogger);
+        bloggerService.registerBlogger(blogger);
         return "redirect:/login";
     }
 
