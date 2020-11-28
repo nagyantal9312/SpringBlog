@@ -22,9 +22,18 @@
                     <input type="password" class="form-control" id="password" th:field="*{password}" >
                     <span class="validationError" ></span>
                 </div>
+                <div class="validationError"  th:if="${param.error}" th:with="errorMsg=${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">
+                    <label th:text="#{login.error}"></label>
+                    <span th:text="${errorMsg}">Wrong input!</span>
+                </div>
+
+
                 <button type="submit" class="btn btn-primary" th:text="#{login}" >XLoginX</button>
                 <a th:href="@{/register}" class="btn btn-secondary" th:text="#{register}" >Register</a>
             </form>
         </div>
+
+
+
     </body>
 </html>

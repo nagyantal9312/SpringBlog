@@ -47,6 +47,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/register").permitAll()
+                .antMatchers("/login").permitAll()
+
                 .antMatchers("/css/**", "/images/**").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/h2/**").permitAll()
@@ -55,7 +57,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login").permitAll()
                 .successForwardUrl("/blogger")
-                .failureForwardUrl("/login")
+               // .failureForwardUrl("/login")
+                //.failureUrl("/login")
                 .and()
                 .logout().permitAll()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

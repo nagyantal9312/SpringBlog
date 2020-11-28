@@ -62,8 +62,11 @@ public class Blogger extends AuditableEntity<String> implements UserDetails {
         return true;
     }
 
+
     @Override
     public boolean isAccountNonLocked() {
+        /*Locked indicates an account has been automatically suspended due to invalid login attempts.
+        Usually the passage of time or (less often) requesting manual unlocking is required to release it. */
         return true;
     }
 
@@ -74,7 +77,9 @@ public class Blogger extends AuditableEntity<String> implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        /* Disabled indicates an account has been administratively or automatically disabled for some reason.
+       Usually some action is required to release it. */
+        return this.enabled ? true : false;
     }
 
 
