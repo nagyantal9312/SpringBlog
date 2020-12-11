@@ -16,8 +16,8 @@ INSERT INTO BLOGGER_ROLES VALUES('sanyi','1');
 INSERT INTO BLOGGER_ROLES VALUES('admin','1');
 INSERT INTO BLOGGER_ROLES VALUES('admin','2');
 
-INSERT INTO BLOG_POST(text, title) VALUES('Ez az első szöveg', 'Első poszt');
-INSERT INTO BLOG_POST(text, title) VALUES('Ez a második szöveg', 'Második poszt');
+INSERT INTO BLOG_POST(text, title, created_by) VALUES('Ez az első szöveg', 'Első poszt','bela');
+INSERT INTO BLOG_POST(text, title, created_by) VALUES('Ez a második szöveg', 'Második poszt','sanyi');
 
 INSERT INTO BLOG_POST_CATEGORIES(blog_posts_id, categories_name) VALUES('1','Politika');
 INSERT INTO BLOG_POST_CATEGORIES(blog_posts_id, categories_name) VALUES('2','Politika');
@@ -33,4 +33,4 @@ INSERT INTO COMMENT(text,blog_post_id) VALUES('Masodik komment', '1');
 INSERT INTO COMMENT(text,blog_post_id) VALUES('Harmadik komment', '1');
 INSERT INTO COMMENT(text,blog_post_id) VALUES('Negyedik komment',  '2');*/
 
-INSERT INTO COMMENT(text,blog_post_id,created_by) VALUES('Elso komment','1','bela89');
+INSERT INTO COMMENT(text,blog_post_id,created_by) VALUES('Elso komment','1','bela');

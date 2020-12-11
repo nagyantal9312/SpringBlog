@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,6 +24,15 @@ public class Comment extends AuditableEntity<String> {
 
     @Transient
     private String photoHelper;
+
+    @OneToMany(mappedBy = "comment", cascade= CascadeType.ALL, orphanRemoval = true)
+    private List<CommentReaction> commentReactions;
+
+    @Transient
+    private int likesNumber;
+
+    @Transient
+    private int dislikesNumber;
 
 
 }

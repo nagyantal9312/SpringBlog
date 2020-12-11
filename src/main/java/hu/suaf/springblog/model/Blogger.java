@@ -44,6 +44,13 @@ public class Blogger extends AuditableEntity<String> implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles;
 
+    @OneToMany(mappedBy = "blogger", cascade= CascadeType.ALL, orphanRemoval = true)
+    private List<BlogPostReaction> blogPostReactions;
+
+    @OneToMany(mappedBy = "blogger", cascade= CascadeType.ALL, orphanRemoval = true)
+    private List<CommentReaction> commentReactions;
+
+
 
 
     @Override

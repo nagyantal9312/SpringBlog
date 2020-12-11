@@ -1,13 +1,7 @@
 package hu.suaf.springblog.service;
 
-import hu.suaf.springblog.model.BlogPost;
-import hu.suaf.springblog.model.Blogger;
-import hu.suaf.springblog.model.Category;
-import hu.suaf.springblog.model.Comment;
-import hu.suaf.springblog.repository.BlogPostRepository;
-import hu.suaf.springblog.repository.BloggerRepository;
-import hu.suaf.springblog.repository.CategoryRepository;
-import hu.suaf.springblog.repository.CommentRepository;
+import hu.suaf.springblog.model.*;
+import hu.suaf.springblog.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,13 +16,17 @@ public class BlogPostService {
     private CategoryRepository categoryRepository;
     private BloggerRepository bloggerRepository;
     private CommentRepository commentRepository;
+    private BlogPostReactionRepository blogPostReactionRepository;
+    private CommentReactionRepository commentReactionRepository;
 
     @Autowired
-    public BlogPostService(BlogPostRepository blogPostRepository, CategoryRepository categoryRepository, BloggerRepository bloggerRepository, CommentRepository commentRepository) {
+    public BlogPostService(BlogPostRepository blogPostRepository, CategoryRepository categoryRepository, BloggerRepository bloggerRepository, CommentRepository commentRepository, BlogPostReactionRepository blogPostReactionRepository, CommentReactionRepository commentReactionRepository) {
         this.blogPostRepository = blogPostRepository;
         this.categoryRepository = categoryRepository;
         this.bloggerRepository = bloggerRepository;
         this.commentRepository = commentRepository;
+        this.blogPostReactionRepository = blogPostReactionRepository;
+        this.commentReactionRepository = commentReactionRepository;
     }
 
     public void saveBlogPost(BlogPost b){
@@ -70,6 +68,37 @@ public class BlogPostService {
 
     public List<BlogPost> searchBlogPostByTitle(String title) {
         return blogPostRepository.findAllByTitleContainingOrderByLastModifiedDateDesc(title);
+    }
+
+
+
+    public void saveBlogPostReaction(long blogPostId, String username, boolean type){
+
+        BlogPostReaction blogPostReaction = new BlogPostReaction();
+        blogPostReaction.setBlogPost(blogPostRepository.findById(blogPostId).orElse(null));
+        blogPostReaction.setReactionType(type);
+        blogPostReaction.setBlogger(bloggerRepository.findByUsername(username));
+        blogPostReactionRepository.save(blogPostReaction);
+    }
+
+
+    public void saveCommentReaction(long commentId, String username, boolean type){
+
+        CommentReaction commentReaction = new CommentReaction();
+        commentReaction.setComment(commentRepository.findById(commentId).orElse(null));
+        commentReaction.setReactionType(type);
+        commentReaction.setBlogger(bloggerRepository.findByUsername(username));
+        commentReactionRepository.save(commentReaction);
+
+    }
+
+    public int countBlogPostReaction(long blogPostId, boolean type){
+        return blogPostReactionRepository.countBlogPostReactionByBlogPost_IdAndReactionType(blogPostId,type);
+    }
+
+    public int countCommentReaction(long commentId, boolean type){
+        return commentReactionRepository.countCommentReactionByComment_IdAndReactionType(commentId,type);
+
     }
 
 

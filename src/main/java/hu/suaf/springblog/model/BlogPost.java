@@ -29,5 +29,10 @@ public class BlogPost extends AuditableEntity<String>{
     @Transient
     private String categoryHelper;
 
+    @OneToMany(mappedBy = "blogPost", cascade= CascadeType.ALL, orphanRemoval = true)
+    private List<BlogPostReaction> blogPostReactions;
+
+
+
 
 }

@@ -17,6 +17,21 @@
                     <label th:text="#{author} + ':'"></label>
                     <a href="#" th:href="@{/blogger/profile/{username}(username=${poszt.createdBy})}" th:text="${poszt.createdBy}">szerzőneve</a>
                 </p>
+
+
+                <!--like/dislikeszam-->
+                <div>
+                    <a href="#" >
+                        <img class="logo" th:src="@{/images/likeIcon.svg}">
+                    </a>
+                    <label th:text="${likeSzam}" >666</label>
+                    <a href="#">
+                        <img class="logo" th:src="@{/images/dislikeIcon.svg}">
+                    </a>
+                    <label th:text="${dislikeSzam}">777</label>
+                </div>
+
+
                 <hr>
                     <p th:text="${#dates.format(poszt.createdDate, 'yyyy-MM-dd HH:mm')}">posztolás ideje</p>
                 <hr>
@@ -26,7 +41,7 @@
 
 
 
-
+                <!--komment irasa-->
                 <!--/*@thymesVar id="komment" type="hu.suaf.springblog.model.Comment"*/-->
                 <div class="card my-4" sec:authorize="isAuthenticated()">
                     <h5 class="card-header" th:text="#{leave_a_comment} + ':'">Leave a Comment:</h5>
@@ -44,11 +59,7 @@
 
 
 
-
-
-
-
-
+                <!--kommentek listazasa-->
                 <!--/*@thymesVar id="szerzo" type="hu.suaf.springblog.model.Blogger"*/-->
                 <!--/*@thymesVar id="comments" type="hu.suaf.springblog.model.Comment"*/-->
                 <div class="media mb-4" th:each="item : ${poszt.comments}">
@@ -63,6 +74,20 @@
                         <p th:text="${item.text}">Comment Text</p>
                         <div class="d-flex w-100 justify-content-between">
                             <small th:text="${#dates.format(item.createdDate, 'yyyy-MM-dd HH:mm:ss')}" >Creationdate</small>
+
+                            <!--kommentertekeles-->
+                            <div>
+                                <a href="#" th:href="@{/blogpost/comment/{commentId}/{name}/{type}(commentId=${item.id},name=${#authentication.getName()},type=true)}">
+                                    <img class="logo" th:src="@{/images/likeIcon.svg}">
+                                </a>
+                                <label th:text="${item.likesNumber}" >666</label>
+                                <a href="#" th:href="@{/blogpost/comment/{commentId}/{name}/{type}(commentId=${item.id},name=${#authentication.getName()},type=false)}">
+                                    <img class="logo" th:src="@{/images/dislikeIcon.svg}">
+                                </a>
+                                <label th:text="${item.dislikesNumber}" >777</label>
+                            </div>
+
+
                             <div>
                                 <a href="#" th:href="@{/blogpost/comment/edit/{id}(id=${item.id})}">
                                     <img class="logo" th:src="@{/images/updateIcon.svg}">
@@ -117,6 +142,19 @@
                                 <img th:src="@{/images/deleteIcon.svg}"><small th:text="#{delete}"></small>
                             </button>
                         </a>
+
+                        <!--posztertekeles-->
+                        <a href="#" th:href="@{/blogpost/{blogPostId}/{name}/{type}(blogPostId=${poszt.id},name=${#authentication.getName()},type=true)}">
+                            <button class="btn btn-outline-primary" >
+                                <img th:src="@{/images/likeIcon.svg}"><small>Like</small>
+                            </button>
+                        </a>
+                        <a href="#" th:href="@{/blogpost/{blogPostId}/{name}/{type}(blogPostId=${poszt.id},name=${#authentication.getName()},type=false)}">
+                            <button class="btn btn-outline-primary" >
+                                <img th:src="@{/images/dislikeIcon.svg}"><small>Dislike</small>
+                            </button>
+                        </a>
+
 
 
                     </div>
