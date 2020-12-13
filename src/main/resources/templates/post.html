@@ -71,18 +71,34 @@
                         <div class="d-flex w-100 justify-content-between">
                             <small th:text="${#dates.format(item.createdDate, 'yyyy-MM-dd HH:mm:ss')}" >Creationdate</small>
 
-                            <!--kommentertekeles-->
+
+                            <!--kommentertekelesek kijelzese-->
                             <div>
-                                <a href="#" th:href="@{/blogpost/comment/{commentId}/{name}/{type}(commentId=${item.id},name=${#authentication.getName()},type=true)}">
-                                    <img class="logo" th:src="@{/images/likeIcon.svg}">
-                                </a>
+                                <img class="logo" th:src="@{/images/likeIcon.svg}">
                                 <label th:text="${item.likesNumber}" >666</label>
-                                <a href="#" th:href="@{/blogpost/comment/{commentId}/{name}/{type}(commentId=${item.id},name=${#authentication.getName()},type=false)}">
-                                    <img class="logo" th:src="@{/images/dislikeIcon.svg}">
-                                </a>
+                                <img class="logo" th:src="@{/images/dislikeIcon.svg}">
                                 <label th:text="${item.dislikesNumber}" >777</label>
                             </div>
 
+
+
+
+
+
+
+                            <!--komment like/dislike gombok-->
+                            <div>
+                                <a href="#" th:href="@{/blogpost/comment/{commentId}/{name}/{type}(commentId=${item.id},name=${#authentication.getName()},type=true)}" sec:authorize="isAuthenticated()">
+                                    <button class="btn btn-outline-primary">
+                                        <img class="logo" th:src="@{/images/likeIcon.svg}"><small>Like</small>
+                                    </button>
+                                </a>
+                                <a href="#" th:href="@{/blogpost/comment/{commentId}/{name}/{type}(commentId=${item.id},name=${#authentication.getName()},type=false)}" sec:authorize="isAuthenticated()">
+                                    <button class="btn btn-outline-primary">
+                                        <img class="logo" th:src="@{/images/dislikeIcon.svg}"><small>Dislike</small>
+                                    </button>
+                                </a>
+                            </div>
 
                             <div>
                                 <a href="#" th:href="@{/blogpost/comment/edit/{commentId}(commentId=${item.id})}">
@@ -140,12 +156,12 @@
                         </a>
 
                         <!--posztertekeles-->
-                        <a href="#" th:href="@{/blogpost/{blogPostId}/{name}/{type}(blogPostId=${poszt.id},name=${#authentication.getName()},type=true)}">
+                        <a href="#" th:href="@{/blogpost/{blogPostId}/{name}/{type}(blogPostId=${poszt.id},name=${#authentication.getName()},type=true)}" sec:authorize="isAuthenticated()">
                             <button class="btn btn-outline-primary" >
                                 <img th:src="@{/images/likeIcon.svg}"><small>Like</small>
                             </button>
                         </a>
-                        <a href="#" th:href="@{/blogpost/{blogPostId}/{name}/{type}(blogPostId=${poszt.id},name=${#authentication.getName()},type=false)}">
+                        <a href="#" th:href="@{/blogpost/{blogPostId}/{name}/{type}(blogPostId=${poszt.id},name=${#authentication.getName()},type=false)}" sec:authorize="isAuthenticated()">
                             <button class="btn btn-outline-primary" >
                                 <img th:src="@{/images/dislikeIcon.svg}"><small>Dislike</small>
                             </button>

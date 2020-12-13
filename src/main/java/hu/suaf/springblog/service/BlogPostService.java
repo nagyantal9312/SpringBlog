@@ -98,8 +98,6 @@ public class BlogPostService {
             blogPostReaction.setReactionType(type);
             blogPostReactionRepository.save(blogPostReaction);
         }
-
-
     }
 
 
