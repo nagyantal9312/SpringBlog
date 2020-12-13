@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping(value = "/blogpost")
 public class BlogPostController {
@@ -40,17 +42,17 @@ public class BlogPostController {
      * @return a poszt oldala
      */
     @GetMapping("/{blogPostId}")
-    public String viewBlogPost(Model model, @PathVariable long blogPostId){
+    public String viewBlogPost(Model model, @PathVariable long blogPostId) {
 
         BlogPost blogPost = blogPostService.findBlogPostById(blogPostId);
-        for(Comment item : blogPost.getComments()){
-            item.setLikesNumber(blogPostService.countCommentReaction(item.getId(),true));
-            item.setDislikesNumber(blogPostService.countCommentReaction(item.getId(),false));
+        for(Comment item : blogPost.getComments()) {
+            item.setLikesNumber(blogPostService.countCommentReaction(item.getId(), true));
+            item.setDislikesNumber(blogPostService.countCommentReaction(item.getId(), false));
         }
         model.addAttribute("poszt", blogPost);
-        model.addAttribute("komment",new Comment());
-        model.addAttribute("likeSzam", blogPostService.countBlogPostReaction(blogPostId,true));
-        model.addAttribute("dislikeSzam", blogPostService.countBlogPostReaction(blogPostId,false));
+        model.addAttribute("komment", new Comment());
+        model.addAttribute("likeSzam", blogPostService.countBlogPostReaction(blogPostId, true));
+        model.addAttribute("dislikeSzam", blogPostService.countBlogPostReaction(blogPostId, false));
 
         return "post";
     }
@@ -63,7 +65,7 @@ public class BlogPostController {
      * @return a letrehozni kivant kommenthez tartozo poszt oldala
      */
     @PostMapping("/{blogPostId}")
-    public String createComment(@PathVariable long blogPostId, Comment comment, BindingResult bindingResult){
+    public String createComment(@PathVariable long blogPostId, Comment comment, BindingResult bindingResult) {
         comment.setBlogPost(blogPostService.findBlogPostById(blogPostId));
 
         commentService.saveComment(comment);
@@ -77,7 +79,7 @@ public class BlogPostController {
      * @return a poszt modositasara szolgalo oldal
      */
     @GetMapping("/edit/{blogPostId}")
-    public String editBlogPostForm(@PathVariable long blogPostId, Model model){
+    public String editBlogPostForm(@PathVariable long blogPostId, Model model) {
         BlogPost blogPost = blogPostService.findBlogPostById(blogPostId);
         model.addAttribute("kategoriak", categoryService.listCategories());
         model.addAttribute("blogPost",blogPost);
@@ -92,7 +94,7 @@ public class BlogPostController {
      * @return a modositando poszt oldala
      */
     @PostMapping("/edit/{blogPostId}")
-    public String editBlogPost(@PathVariable long blogPostId, Model model, BlogPost blogPost){
+    public String editBlogPost(@PathVariable long blogPostId, Model model, BlogPost blogPost) {
         blogPostService.editBlogPost(blogPostId, blogPost);
         return "redirect:/blogpost/" + blogPostId;
     }
@@ -103,7 +105,7 @@ public class BlogPostController {
      * @return a fooldal
      */
     @GetMapping("/delete/{blogPostId}")
-    public String deleteBlogPost(@PathVariable long blogPostId){
+    public String deleteBlogPost(@PathVariable long blogPostId) {
         blogPostService.deleteBlogPost(blogPostId);
         return "redirect:/blogger";
     }
@@ -114,7 +116,7 @@ public class BlogPostController {
      * @return a torolni kivant kommenthez tartozo poszt oldala
      */
     @GetMapping("/comment/delete/{commentId}")
-    public String deleteComment(@PathVariable long commentId){
+    public String deleteComment(@PathVariable long commentId) {
         long idForRedirecting = commentService.findCommentById(commentId).getBlogPost().getId();
         commentService.deleteComment(commentId);
         return "redirect:/blogpost/" + idForRedirecting;
@@ -127,28 +129,28 @@ public class BlogPostController {
      * @return a komment szerkesztesere szolgalo oldal
      */
     @GetMapping("/comment/edit/{commentId}")
-    public String editCommentForm(@PathVariable long commentId, Model model){
+    public String editCommentForm(@PathVariable long commentId, Model model) {
         Comment comment = commentService.findCommentById(commentId);
-        model.addAttribute("komment",comment);
+        model.addAttribute("komment", comment);
         return "comment-edit";
     }
 
     /**
-     * Komment modositasa
+     * Komment modositasa.
      * @param commentId a modositando komment id-je
      * @param model model
      * @param comment az uj komment objektum
      * @return a kommenthez tartozo poszt oldala
      */
     @PostMapping("/comment/edit/{commentId}")
-    public String editComment(@PathVariable long commentId, Model model, Comment comment){
+    public String editComment(@PathVariable long commentId, Model model, Comment comment) {
         long idForRedirecting = commentService.findCommentById(commentId).getBlogPost().getId();
         commentService.editComment(commentId, comment);
         return "redirect:/blogpost/" + idForRedirecting;
     }
 
     /**
-     * Poszt likeolasa / dislikeolasa
+     * Poszt likeolasa / dislikeolasa.
      * @param blogPostId az ertekelni kivant poszt id-ja
      * @param username az ertekelo felhasznalo felhasznaloneve
      * @param type true:like, false:dislike
@@ -156,14 +158,14 @@ public class BlogPostController {
      * @return az ertekelni kivant poszt oldala
      */
     @GetMapping("/{blogPostId}/{username}/{type}")
-    public String reactToBlogPost(@PathVariable long blogPostId, @PathVariable String username, @PathVariable boolean type, Model model){
+    public String reactToBlogPost(@PathVariable long blogPostId, @PathVariable String username, @PathVariable boolean type, Model model) {
 
         blogPostService.saveBlogPostReaction(blogPostId,username,type);
         return "redirect:/blogpost/" + blogPostId;
     }
 
     /**
-     * Komment likeolasa / dislikeolasa
+     * Komment likeolasa / dislikeolasa.
      * @param commentId az ertekelni kivant komment id-ja
      * @param username az ertekelo felhasznalo felhasznaloneve
      * @param type true:like, false:dislike
@@ -171,7 +173,7 @@ public class BlogPostController {
      * @return az ertekelni kivant kommenthez tartozo poszt oldala
      */
     @GetMapping("/comment/{commentId}/{username}/{type}")
-    public String reactToComment(@PathVariable long commentId, @PathVariable String username, @PathVariable boolean type, Model model){
+    public String reactToComment(@PathVariable long commentId, @PathVariable String username, @PathVariable boolean type, Model model) {
 
         long idForRedirecting = commentService.findCommentById(commentId).getBlogPost().getId();
         blogPostService.saveCommentReaction(commentId,username,type);

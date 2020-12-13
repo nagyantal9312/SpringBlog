@@ -36,7 +36,7 @@ public class BloggerController {
 
 
     /**
-     * Posztok cimeben kereses GET keressel
+     * Posztok cimeben kereses GET keressel.
      * @param model model
      * @param title a szoveg amit a cimben keresunk
      * @return fooldal, amin a keresett posztok listazodnak
@@ -59,7 +59,7 @@ public class BloggerController {
     }
 
     /**
-     * Poszt letrehozasara szolgalo oldal feltoltese adatokkal
+     * Poszt letrehozasara szolgalo oldal feltoltese adatokkal.
      * @param model model
      * @param blogPost a letrehozando poszt objektum
      * @return a posztok letrehozasara szolgalo oldal

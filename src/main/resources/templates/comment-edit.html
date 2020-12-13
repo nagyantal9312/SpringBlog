@@ -12,7 +12,7 @@
         <div class="form-group">
             <label for="commentText" th:text="#{text}">Szöveg</label>
             <input type="text" class="form-control" id="commentText" th:field="*{text}" >
-            <span class="validationError" ></span>
+            <span class="validationError" th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></span>
         </div>
         <button type="submit" class="btn btn-primary" th:text="#{submit}">Submit</button>
     </form>

@@ -32,7 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws RuntimeException  {
 
         Blogger blogger = bloggerRepository.findByUsername(username);
-        if(blogger == null) {
+        if (blogger == null) {
             throw new UsernameNotFoundException("Not able to find the user named: " + username);
         }
 
@@ -49,9 +49,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
 
-    private String getClientIP(){
+    private String getClientIP() {
         String xfHeader = request.getHeader("X-Forwarded-For");
-        if(xfHeader == null){
+        if (xfHeader == null) {
             return request.getRemoteAddr();
         }
         return xfHeader.split(",")[0];

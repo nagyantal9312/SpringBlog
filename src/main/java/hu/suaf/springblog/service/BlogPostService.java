@@ -92,7 +92,7 @@ public class BlogPostService {
      * @param blogPostId a modositando poszt id-je
      * @param blogPost az uj poszt objektum
      */
-    public void editBlogPost(long blogPostId, BlogPost blogPost){
+    public void editBlogPost(long blogPostId, BlogPost blogPost) {
 
         BlogPost eredeti = blogPostRepository.findById(blogPostId).orElse(null);
 
@@ -141,12 +141,12 @@ public class BlogPostService {
         //ertekelte e mar a user a posztot korabban a mostani reakcioval ellentetes reakcioval
         BlogPostReaction negalt  = blogPostReactionRepository.findByBlogPost_IdAndBlogger_UsernameAndReactionType(blogPostId, username, !type);
 
-        if(bpr != null) {
+        if (bpr != null) {
             blogPostReactionRepository.deleteById(bpr.getId());
-        }else if(negalt != null) {
+        } else if (negalt != null) {
             negalt.setReactionType(type);
             blogPostReactionRepository.save(negalt);
-        }else {
+        } else {
             BlogPostReaction blogPostReaction = new BlogPostReaction();
             blogPostReaction.setBlogPost(blogPostRepository.findById(blogPostId).orElse(null));
             blogPostReaction.setBlogger(bloggerRepository.findByUsername(username));
@@ -170,12 +170,12 @@ public class BlogPostService {
         //ertekelte e mar a user a kommentet korabban a mostani reakcioval ellentetes reakcioval
         CommentReaction negalt = commentReactionRepository.findByComment_IdAndBlogger_UsernameAndReactionType(commentId, username, !type);
 
-        if(cr != null) {
+        if (cr != null) {
             commentReactionRepository.deleteById(cr.getId());
-        }else if(negalt != null) {
+        } else if (negalt != null) {
             negalt.setReactionType(type);
             commentReactionRepository.save(negalt);
-        }else{
+        } else {
             CommentReaction commentReaction = new CommentReaction();
             commentReaction.setComment(commentRepository.findById(commentId).orElse(null));
             commentReaction.setReactionType(type);

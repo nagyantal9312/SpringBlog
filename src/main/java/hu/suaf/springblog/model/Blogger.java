@@ -33,7 +33,8 @@ public class Blogger extends AbstractAuditableEntity<String> implements UserDeta
     @NotBlank
     private String name;
 
-    @Column(columnDefinition = "LONGTEXT")
+    //@Column(columnDefinition = "LONGTEXT")
+    @Column(length=10485760)
     private String photo;
 
     @PastOrPresent

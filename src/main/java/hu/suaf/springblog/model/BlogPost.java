@@ -2,6 +2,7 @@ package hu.suaf.springblog.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import org.hibernate.query.criteria.internal.expression.function.AggregationFunction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -18,8 +19,9 @@ public class BlogPost extends AbstractAuditableEntity<String> {
     @NotBlank
     private String title;
 
-    @Column(columnDefinition = "LONGTEXT")
+//    @Column(columnDefinition = "LONGTEXT")
     @NotBlank
+    @Column(length=10485760)
     private String text;
 
 

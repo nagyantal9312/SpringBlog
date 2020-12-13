@@ -28,7 +28,7 @@ public class BloggerRestController {
 
 
     /**
-     * Visszaadja a parameterben kapott username alapjan a bloggert
+     * Visszaadja a parameterben kapott username alapjan a bloggert.
      * @param username felhasznalonev
      * @return a keresett blogger
      */
@@ -44,8 +44,8 @@ public class BloggerRestController {
 
 
     /**
-     * Blogger torlese felhasznalonev alapjan
-     * @param username
+     * Blogger torlese felhasznalonev alapjan.
+     * @param username a torlendo felhasznalo felhasznaloneve
      */
     @DeleteMapping("/delete/{username}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
@@ -56,9 +56,9 @@ public class BloggerRestController {
 
 
     /**
-     * Letiltja a felhasznalot, ha mar le van tiltva akkor pedig leveszi rola a tiltast
-     * @param username
-     * @return
+     * Letiltja a felhasznalot, ha mar le van tiltva akkor pedig leveszi rola a tiltast.
+     * @param username a letiltando felhasznalo felhasznaloneve
+     * @return siker eseten: OK, ha nem letezik a felhasznalo: NOT_FOUND
      */
     @PutMapping("/ban/{username}")
     public ResponseEntity<Blogger> banBlogger(@PathVariable String username){
