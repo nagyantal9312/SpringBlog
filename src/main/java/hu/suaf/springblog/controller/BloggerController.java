@@ -58,10 +58,15 @@ public class BloggerController {
         return "home";
     }
 
-
+    /**
+     * Poszt letrehozasara szolgalo oldal feltoltese adatokkal
+     * @param model model
+     * @param blogPost a letrehozando poszt objektum
+     * @return a posztok letrehozasara szolgalo oldal
+     */
     @GetMapping("/post-create")
     public String createBlogPostForm(Model model, BlogPost blogPost) {
-        //TODO: a blogpost validacio hibaja esetek nem toltodik be
+        //TODO: validacios hiba eseten nem toltodik be ujra a kategoriak listaja
         model.addAttribute("kategoriak", categoryService.listCategories());
         return "post-create";
     }
@@ -103,7 +108,6 @@ public class BloggerController {
     @PostMapping("/profile/{username}")
     public String editProfile(@PathVariable String username, @Valid Blogger blogger, BindingResult result){
         if(result.hasErrors()){
-
             return "profile";
         }
         bloggerService.editBlogger(blogger);

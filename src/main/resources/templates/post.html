@@ -90,12 +90,12 @@
                             <div>
                                 <a href="#" th:href="@{/blogpost/comment/{commentId}/{name}/{type}(commentId=${item.id},name=${#authentication.getName()},type=true)}" sec:authorize="isAuthenticated()">
                                     <button class="btn btn-outline-primary">
-                                        <img class="logo" th:src="@{/images/likeIcon.svg}"><small>Like</small>
+                                        <img class="logo" th:src="@{/images/likeIcon.svg}"><small th:text="#{like}">Like</small>
                                     </button>
                                 </a>
                                 <a href="#" th:href="@{/blogpost/comment/{commentId}/{name}/{type}(commentId=${item.id},name=${#authentication.getName()},type=false)}" sec:authorize="isAuthenticated()">
                                     <button class="btn btn-outline-primary">
-                                        <img class="logo" th:src="@{/images/dislikeIcon.svg}"><small>Dislike</small>
+                                        <img class="logo" th:src="@{/images/dislikeIcon.svg}"><small th:text="#{dislike}">Dislike</small>
                                     </button>
                                 </a>
                             </div>
@@ -144,12 +144,12 @@
                 <div class="card my-4">
                     <h5 class="card-header" th:text="#{action}">Action</h5>
                     <div class="card-body">
-                        <a href="#" th:href="@{/blogpost/edit/{blogPostId}(blogPostId=${poszt.id})}">
+                        <a href="#" th:href="@{/blogpost/edit/{blogPostId}(blogPostId=${poszt.id})}" th:if="${poszt.createdBy} == ${#authentication.getName()}">
                             <button class="btn btn-outline-primary">
                                 <img th:src="@{/images/updateIcon.svg}"><small th:text="#{edit}"></small>
                             </button>
                         </a>
-                        <a href="#" th:href="@{/blogpost/delete/{blogPostId}(blogPostId=${poszt.id})}">
+                        <a href="#" th:href="@{/blogpost/delete/{blogPostId}(blogPostId=${poszt.id})}" th:if="${poszt.createdBy} == ${#authentication.getName()}">
                             <button class="btn btn-outline-primary" >
                                 <img th:src="@{/images/deleteIcon.svg}"><small th:text="#{delete}"></small>
                             </button>
@@ -158,12 +158,12 @@
                         <!--posztertekeles-->
                         <a href="#" th:href="@{/blogpost/{blogPostId}/{name}/{type}(blogPostId=${poszt.id},name=${#authentication.getName()},type=true)}" sec:authorize="isAuthenticated()">
                             <button class="btn btn-outline-primary" >
-                                <img th:src="@{/images/likeIcon.svg}"><small>Like</small>
+                                <img th:src="@{/images/likeIcon.svg}"><small th:text="#{like}">Like</small>
                             </button>
                         </a>
                         <a href="#" th:href="@{/blogpost/{blogPostId}/{name}/{type}(blogPostId=${poszt.id},name=${#authentication.getName()},type=false)}" sec:authorize="isAuthenticated()">
                             <button class="btn btn-outline-primary" >
-                                <img th:src="@{/images/dislikeIcon.svg}"><small>Dislike</small>
+                                <img th:src="@{/images/dislikeIcon.svg}"><small th:text="#{dislike}">Dislike</small>
                             </button>
                         </a>
 

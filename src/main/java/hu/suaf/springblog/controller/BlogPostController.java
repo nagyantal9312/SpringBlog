@@ -33,6 +33,12 @@ public class BlogPostController {
 
     }
 
+    /**
+     * Poszt oldal feltoltese adatokkal
+     * @param model model
+     * @param blogPostId annak a posztnak az id-je, amelyiknek az oldalat fel akarjuk tolteni adatokkal
+     * @return a poszt oldala
+     */
     @GetMapping("/{blogPostId}")
     public String viewBlogPost(Model model, @PathVariable long blogPostId){
 
@@ -64,7 +70,12 @@ public class BlogPostController {
         return "redirect:/blogpost/" + blogPostId;
     }
 
-
+    /**
+     * A posztot modosito oldal feltoltese a modositas elotti objektummal.
+     * @param blogPostId a modositando poszt id-je
+     * @param model model
+     * @return a poszt modositasara szolgalo oldal
+     */
     @GetMapping("/edit/{blogPostId}")
     public String editBlogPostForm(@PathVariable long blogPostId, Model model){
         BlogPost blogPost = blogPostService.findBlogPostById(blogPostId);
@@ -73,13 +84,18 @@ public class BlogPostController {
         return "post-create";
     }
 
-    //TODO nem mukodik a poszt modositas
+    /**
+     * Poszt modositasa
+     * @param blogPostId a modositando poszt id-je
+     * @param model model
+     * @param blogPost az uj poszt objektum
+     * @return a modositando poszt oldala
+     */
     @PostMapping("/edit/{blogPostId}")
     public String editBlogPost(@PathVariable long blogPostId, Model model, BlogPost blogPost){
-        blogPostService.saveBlogPost(blogPost);
+        blogPostService.editBlogPost(blogPostId, blogPost);
         return "redirect:/blogpost/" + blogPostId;
     }
-
 
     /**
      * Poszt torlese
@@ -130,7 +146,6 @@ public class BlogPostController {
         commentService.editComment(commentId, comment);
         return "redirect:/blogpost/" + idForRedirecting;
     }
-
 
     /**
      * Poszt likeolasa / dislikeolasa

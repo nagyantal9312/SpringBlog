@@ -13,13 +13,15 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class LoginAttemptService {
 
+    //a probalkozasok szama mielott blokkoljuk a felhasznalot
     private static final int MAX_ATTEMPT = 2;
     private LoadingCache<String, Integer> attemptsCache;
 
 
     public LoginAttemptService(){
         super();
-        attemptsCache = CacheBuilder.newBuilder().expireAfterWrite(2, TimeUnit.MINUTES).build(new CacheLoader<String, Integer>() {
+        //jelenleg 1 percre van allitva a blokkolas
+        attemptsCache = CacheBuilder.newBuilder().expireAfterWrite(1, TimeUnit.MINUTES).build(new CacheLoader<String, Integer>() {
             @Override
             public Integer load(String key) throws Exception {
                 return 0;

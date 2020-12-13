@@ -27,16 +27,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private HttpServletRequest request;
 
 
-    /*@Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        Blogger blogger = bloggerRepository.findByUsername(username);
-        if(blogger == null) {
-            throw new UsernameNotFoundException("Not able to find the user named: " + username);
-        }
-        return blogger;
-
-    }*/
 
     @Override
     public UserDetails loadUserByUsername(String username) throws RuntimeException  {
@@ -55,15 +45,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new RuntimeException("blocked");
 
         }
-
-
-
         return blogger;
-
     }
-
-
-
 
 
     private String getClientIP(){

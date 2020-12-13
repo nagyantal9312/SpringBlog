@@ -56,7 +56,6 @@ public class BloggerService {
 
     public void editBlogger(Blogger blogger) {
 
-        //System.out.println("SSERVICE: " + blogger.getUsername() + blogger.getName() + blogger.getEmail() + blogger.getRoles() + blogger.getPassword() + blogger.getBirthDate());
         Blogger bg = bloggerRepository.findByUsername(blogger.getUsername());
         blogger.setPhoto(bg.getPhoto());
         blogger.setBlogPostReactions(bg.getBlogPostReactions());

@@ -29,16 +29,25 @@ public class BlogPostService {
         this.commentReactionRepository = commentReactionRepository;
     }
 
+    /**
+     * Poszt mentese.
+     * @param b a mentesre varo poszt
+     * @return az elmentett poszt
+     */
     public BlogPost saveBlogPost(BlogPost b) {
-        List<Category> c = new ArrayList<>();
-        List<String> k = Arrays.asList(b.getCategoryHelper().split(","));
-        for(String item : k) {
-            Category category = new Category();
-            category.setName(item);
-            c.add(category);
+
+        if(b.getCategoryHelper() != null) {
+            List<Category> c = new ArrayList<>();
+            List<String> k = Arrays.asList(b.getCategoryHelper().split(","));
+            for(String item : k) {
+                Category category = new Category();
+                category.setName(item);
+                c.add(category);
+            }
+            b.setCategories(c);
+            b.setCategoryHelper(null);
         }
-        b.setCategories(c);
-        b.setCategoryHelper(null);
+
         //biztositja hogy a cim elso betuje nagybetus legyen
         b.setTitle(b.getTitle().substring(0,1).toUpperCase() + b.getTitle().substring(1));
         blogPostRepository.save(b);
@@ -46,11 +55,19 @@ public class BlogPostService {
     }
 
 
-
+    /**
+     * Visszaadja a posztokat legutolso modositas szerinti csokkeno sorrendben.
+     * @return egy lista, amely a posztokat tartalmazza legutolso modositas szerinti csokkeno sorrendben.
+     */
     public List<BlogPost> listBlogPosts() {
         return blogPostRepository.findAllByOrderByLastModifiedDateDesc();
     }
 
+    /**
+     * Id alapjan megkeres egy posztot, valamint a poszthoz tartozo kommentekhez beallitja a szerzok profilkepeit,
+     * @param id a keresett poszt id-je
+     * @return a keresett poszt es a profilkepekkel feltoltott kommentek
+     */
     public BlogPost findBlogPostById(long id) {
 
         BlogPost blogPost = blogPostRepository.findById(id).orElse(null);
@@ -62,15 +79,53 @@ public class BlogPostService {
         return blogPost;
     }
 
+    /**
+     * Poszt torlese
+     * @param id a torlendo poszt id-je
+     */
     public void deleteBlogPost(long id) {
         blogPostRepository.deleteById(id);
-
     }
 
+    /**
+     * Poszt modositasa.
+     * @param blogPostId a modositando poszt id-je
+     * @param blogPost az uj poszt objektum
+     */
+    public void editBlogPost(long blogPostId, BlogPost blogPost){
+
+        BlogPost eredeti = blogPostRepository.findById(blogPostId).orElse(null);
+
+        //ha a modositas soran nem adunk meg uj kategoriat, akkor nem fog valtozas tortenni
+        if(blogPost.getCategoryHelper() != null) {
+            List<Category> c = new ArrayList<>();
+            List<String> k = Arrays.asList(blogPost.getCategoryHelper().split(","));
+            for(String item : k) {
+                Category category = new Category();
+                category.setName(item);
+                c.add(category);
+            }
+            eredeti.setCategories(c);
+            eredeti.setCategoryHelper(null);
+        }
+
+        //biztositja hogy a cim elso betuje nagybetus legyen
+        eredeti.setTitle(blogPost.getTitle().substring(0,1).toUpperCase() + blogPost.getTitle().substring(1));
+        eredeti.setText(blogPost.getText());
+        blogPostRepository.save(eredeti);
+    }
+
+
+
+
+    /**
+     * Visszaadja azokat a posztokat, amelyek cimei tartalmazzak a keresett szoveget.
+     * @param title a szovegreszlet amit keresunk a posztok cimeiben
+     * @return egy lista azokkal a posztokkal, amelyek cimei tartalmazzak a parameterben kapott szoveget
+     */
     public List<BlogPost> searchBlogPostByTitle(String title) {
         return blogPostRepository.findAllByTitleContainingOrderByLastModifiedDateDesc(title);
     }
-
 
     /**
      * Posztra adott reakcio mentese. Ha a blogger meg nem ertekelte a posztot, uj rekord keletkezik.
@@ -99,7 +154,6 @@ public class BlogPostService {
             blogPostReactionRepository.save(blogPostReaction);
         }
     }
-
 
     /**
      *  Kommentre adott reakcio mentese. Ha a blogger meg nem ertekelte a kommentet, uj rekord keletkezik.
@@ -130,13 +184,24 @@ public class BlogPostService {
         }
     }
 
+    /**
+     * Megszamolja, hogy az adott poszt hany db egy adott fajtaju reakcioval rendelkezik
+     * @param blogPostId a vizsgalt poszt id-je
+     * @param type a reakcio tipusa, true:like, false:dislike
+     * @return a poszt adott fajtaju reakcioinak szama
+     */
     public int countBlogPostReaction(long blogPostId, boolean type) {
         return blogPostReactionRepository.countBlogPostReactionByBlogPost_IdAndReactionType(blogPostId, type);
     }
 
+    /**
+     * Megszamolja, hogy az adott komment hany db egy adott fajtaju reakcioval rendelkezik
+     * @param commentId a vizsgalt komment id-je
+     * @param type a reakcio tipusa, true:like, false:dislike
+     * @return a komment adott fajtaju reakcioinak szama
+     */
     public int countCommentReaction(long commentId, boolean type) {
         return commentReactionRepository.countCommentReactionByComment_IdAndReactionType(commentId, type);
-
     }
 
 
