@@ -1,5 +1,6 @@
 package hu.suaf.springblog.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +17,7 @@ public abstract class Reaction {
     private boolean reactionType;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     private Blogger blogger;
 
 

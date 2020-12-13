@@ -32,10 +32,10 @@
             <div class="col-md-4">
                 <!-- Search Widget -->
                 <div class="card my-4">
-                    <h5 class="card-header">Search</h5>
+                    <h5 class="card-header" th:text="#{search.in.title}">Search</h5>
                     <div class="card-body">
                         <form th:action="@{/blogger}" method="get" class="input-group">
-                            <input th:name="cim" type="text" class="form-control" placeholder="Search for...">
+                            <input th:name="cim" type="text" class="form-control" th:placeholder="#{search.for}" placeholder="Search for...">
                             <span class="input-group-append">
                                 <button class="btn btn-secondary" type="submit">Go!</button>
                             </span>

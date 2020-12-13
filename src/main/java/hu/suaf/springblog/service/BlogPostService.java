@@ -29,7 +29,7 @@ public class BlogPostService {
         this.commentReactionRepository = commentReactionRepository;
     }
 
-    public void saveBlogPost(BlogPost b){
+    public BlogPost saveBlogPost(BlogPost b){
         List<Category> c = new ArrayList<>();
         List<String> k = Arrays.asList(b.getCategoryHelper().split(","));
         for(String item : k) {
@@ -42,6 +42,7 @@ public class BlogPostService {
         //biztositja hogy a cim elso betuje nagybetus legyen
         b.setTitle(b.getTitle().substring(0,1).toUpperCase() + b.getTitle().substring(1));
         blogPostRepository.save(b);
+        return b;
     }
 
 

@@ -21,13 +21,9 @@
 
                 <!--like/dislikeszam-->
                 <div>
-                    <a href="#" >
-                        <img class="logo" th:src="@{/images/likeIcon.svg}">
-                    </a>
+                    <img class="logo" th:src="@{/images/likeIcon.svg}">
                     <label th:text="${likeSzam}" >666</label>
-                    <a href="#">
-                        <img class="logo" th:src="@{/images/dislikeIcon.svg}">
-                    </a>
+                    <img class="logo" th:src="@{/images/dislikeIcon.svg}">
                     <label th:text="${dislikeSzam}">777</label>
                 </div>
 
@@ -46,7 +42,7 @@
                 <div class="card my-4" sec:authorize="isAuthenticated()">
                     <h5 class="card-header" th:text="#{leave_a_comment} + ':'">Leave a Comment:</h5>
                     <div class="card-body">
-                        <form th:object="${komment}" th:action="@{/blogpost/{id}(id=${poszt.id})}" method="post">
+                        <form th:object="${komment}" th:action="@{/blogpost/{blogPostId}(blogPostId=${poszt.id})}" method="post">
                             <div class="form-group">
                                 <textarea class="form-control" rows="3" th:field="*{text}"></textarea>
                             </div>
@@ -89,10 +85,10 @@
 
 
                             <div>
-                                <a href="#" th:href="@{/blogpost/comment/edit/{id}(id=${item.id})}">
+                                <a href="#" th:href="@{/blogpost/comment/edit/{commentId}(commentId=${item.id})}">
                                     <img class="logo" th:src="@{/images/updateIcon.svg}">
                                 </a>
-                                <a href="#" th:href="@{/blogpost/comment/delete/{id}(id=${item.id})}">
+                                <a href="#" th:href="@{/blogpost/comment/delete/{commentId}(commentId=${item.id})}">
                                     <img class="logo" th:src="@{/images/deleteIcon.svg}">
                                 </a>
                             </div>
@@ -132,12 +128,12 @@
                 <div class="card my-4">
                     <h5 class="card-header" th:text="#{action}">Action</h5>
                     <div class="card-body">
-                        <a href="#" th:href="@{/blogpost/edit/{id}(id=${poszt.id})}">
+                        <a href="#" th:href="@{/blogpost/edit/{blogPostId}(blogPostId=${poszt.id})}">
                             <button class="btn btn-outline-primary">
                                 <img th:src="@{/images/updateIcon.svg}"><small th:text="#{edit}"></small>
                             </button>
                         </a>
-                        <a href="#" th:href="@{/blogpost/delete/{id}(id=${poszt.id})}">
+                        <a href="#" th:href="@{/blogpost/delete/{blogPostId}(blogPostId=${poszt.id})}">
                             <button class="btn btn-outline-primary" >
                                 <img th:src="@{/images/deleteIcon.svg}"><small th:text="#{delete}"></small>
                             </button>

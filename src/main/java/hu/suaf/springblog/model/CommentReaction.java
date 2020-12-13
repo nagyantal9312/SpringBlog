@@ -1,5 +1,6 @@
 package hu.suaf.springblog.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,7 @@ public class CommentReaction extends Reaction{
     private long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     private Comment comment;
 
 

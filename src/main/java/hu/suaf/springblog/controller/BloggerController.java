@@ -44,7 +44,12 @@ public class BloggerController {
     }
 */
 
-
+    /**
+     * Posztok listazasa a fo oldalon get keres
+     * @param model
+     * @param title
+     * @return
+     */
     @GetMapping("")
     public String listBlogPosts_get(Model model,@RequestParam(value = "cim", required = false) String title){
 
@@ -62,28 +67,52 @@ public class BloggerController {
         return "home";
     }
 
+    /**
+     * Poszt letrehozo oldalra get keres
+     * @param model
+     * @param blogPost
+     * @return
+     */
     @GetMapping("/post-create")
     public String createBlogPostForm(Model model, BlogPost blogPost) {
         model.addAttribute("kategoriak", categoryService.listCategories());
         return "post-create";
     }
 
+    /**
+     * Uj poszt letrehozasa post keres
+     * @param blogPost
+     * @param bindingResult
+     * @return
+     */
     @PostMapping("/post-create")
-    public String createBlogPost(BlogPost blogPost, BindingResult bindingResult){
+    public String createBlogPost(@Valid BlogPost blogPost, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            return "/post-create";
+            return "post-create";
         }
         blogPostService.saveBlogPost(blogPost);
         return "redirect:/blogger";
     }
 
-
+    /**
+     * Profil oldal megjelenites get keres
+     * @param username
+     * @param model
+     * @return
+     */
     @GetMapping("/profile/{username}")
     public String createProfilePage(@PathVariable String username, Model model) {
         model.addAttribute("ezegyBlogger", bloggerService.findByUsername(username));
         return "profile";
     }
 
+    /**
+     * Profil oldal modositasa post keres
+     * @param username
+     * @param blogger
+     * @param result
+     * @return
+     */
     @PostMapping("/profile/{username}")
     public String editProfile(@PathVariable String username, @Valid Blogger blogger, BindingResult result){
         if(result.hasErrors()){
@@ -96,8 +125,12 @@ public class BloggerController {
     }
 
 
-
-
+    /**
+     * Profil fenykep modositasa post keres
+     * @param username
+     * @param image
+     * @return
+     */
     @PostMapping("/profile/photo/{username}")
     public String editPhoto(@PathVariable String username, @RequestParam("image") MultipartFile image){
 

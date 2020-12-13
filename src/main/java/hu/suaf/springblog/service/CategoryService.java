@@ -21,5 +21,12 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
+    public void deleteCategory(String name) {
+        categoryRepository.deleteByName(name);
+    }
+
+    public Category saveCategory(Category category){
+        return categoryRepository.save(category);
+    }
 
 }

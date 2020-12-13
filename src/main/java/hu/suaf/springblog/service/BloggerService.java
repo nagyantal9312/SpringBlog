@@ -68,6 +68,17 @@ public class BloggerService {
     }
 
 
+    public Blogger banBlogger(Blogger blogger){
+
+        if(blogger.isEnabled()){
+            blogger.setEnabled(false);
+        }else{
+            blogger.setEnabled(true);
+        }
+        return bloggerRepository.save(blogger);
+    }
+
+
 
     public void uploadPhoto(Blogger blogger, MultipartFile image) {
 
@@ -89,6 +100,10 @@ public class BloggerService {
 
     public Blogger findByUsername(String username) {
         return bloggerRepository.findByUsername(username);
+    }
+
+    public void deleteBlogger(String username){
+        bloggerRepository.deleteByUsername(username);
     }
 
 

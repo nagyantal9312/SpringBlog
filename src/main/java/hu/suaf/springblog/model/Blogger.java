@@ -1,6 +1,7 @@
 package hu.suaf.springblog.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
@@ -45,9 +46,11 @@ public class Blogger extends AuditableEntity<String> implements UserDetails {
     private Collection<Role> roles;
 
     @OneToMany(mappedBy = "blogger", cascade= CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<BlogPostReaction> blogPostReactions;
 
     @OneToMany(mappedBy = "blogger", cascade= CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<CommentReaction> commentReactions;
 
 

@@ -1,5 +1,7 @@
 package hu.suaf.springblog.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,12 +22,14 @@ public class Comment extends AuditableEntity<String> {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     private BlogPost blogPost;
 
     @Transient
     private String photoHelper;
 
     @OneToMany(mappedBy = "comment", cascade= CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<CommentReaction> commentReactions;
 
     @Transient

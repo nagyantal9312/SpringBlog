@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/blogpost")
+@RequestMapping(value = "/blogpost")
 public class BlogPostController {
 
     private BlogPostService blogPostService;
@@ -75,12 +75,22 @@ public class BlogPostController {
     }
 
 
+    /**
+     * Poszt torlese
+     * @param blogPostId
+     * @return
+     */
     @GetMapping("/delete/{blogPostId}")
     public String deleteBlogPost(@PathVariable long blogPostId){
         blogPostService.deleteBlogPost(blogPostId);
         return "redirect:/blogger";
     }
 
+    /**
+     * Komment torlese
+     * @param commentId
+     * @return
+     */
     @GetMapping("/comment/delete/{commentId}")
     public String deleteComment(@PathVariable long commentId){
         long idForRedirecting = commentService.findCommentById(commentId).getBlogPost().getId();
@@ -103,6 +113,14 @@ public class BlogPostController {
     }
 
 
+    /**
+     * Poszt likeolasa / dislikeolasa
+     * @param blogPostId
+     * @param username
+     * @param type
+     * @param model
+     * @return
+     */
     @GetMapping("/{blogPostId}/{username}/{type}")
     public String reactToBlogPost(@PathVariable long blogPostId, @PathVariable String username, @PathVariable boolean type, Model model){
 
@@ -110,6 +128,14 @@ public class BlogPostController {
         return "redirect:/blogpost/" + blogPostId;
     }
 
+    /**
+     * Komment likeolasa / dislikeolasa
+     * @param commentId
+     * @param username
+     * @param type
+     * @param model
+     * @return
+     */
     @GetMapping("/comment/{commentId}/{username}/{type}")
     public String reactToComment(@PathVariable long commentId, @PathVariable String username, @PathVariable boolean type, Model model){
 

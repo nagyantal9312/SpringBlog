@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface BloggerRepository extends JpaRepository<Blogger, Long> {
 
     Blogger findByUsername(String username);
+    void deleteByUsername(String username);
 
 
 
