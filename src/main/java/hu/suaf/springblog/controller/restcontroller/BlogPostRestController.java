@@ -29,8 +29,8 @@ public class BlogPostRestController {
     }
 
     /**
-     * Poszt keresese id alapjan
-     * @param blogPostId
+     * Poszt keresese id alapjan.
+     * @param blogPostId keresett poszt id-je
      * @return
      */
     @GetMapping("/{blogPostId}")
@@ -42,12 +42,9 @@ public class BlogPostRestController {
         return new ResponseEntity<>(blogPost,HttpStatus.OK);
     }
 
-
-
-
     /**
-     * Poszt torlese id alapjan
-     * @param blogPostId
+     * Poszt torlese id alapjan.
+     * @param blogPostId torlendo poszt id-je
      */
     @DeleteMapping("/delete/{blogPostId}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)

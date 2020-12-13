@@ -32,8 +32,8 @@ public class CategoryRestController {
     }
 
     /**
-     * Kategoriak listazasa
-     * @return
+     * Kategoriak listazasa.
+     * @return kategoriak listaja
      */
     @GetMapping
     public Iterable<Category> listCategories() {
@@ -41,8 +41,8 @@ public class CategoryRestController {
     }
 
     /**
-     * Kategoria torlese nev alapjan
-     * @param name
+     * Kategoria torlese nev alapjan.
+     * @param name torlendo kategoria neve
      */
     @DeleteMapping("/delete/{name}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
@@ -56,8 +56,6 @@ public class CategoryRestController {
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public HttpEntity<Category> addCategory(@RequestBody Category category) {
-        //return categoryService.saveCategory(category);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.saveCategory(category));
     }
 

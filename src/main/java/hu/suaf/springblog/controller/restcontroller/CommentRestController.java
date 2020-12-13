@@ -21,9 +21,9 @@ public class CommentRestController {
 
 
     /**
-     * Komment keresese id alapjan
-     * @param commentId
-     * @return
+     * Komment keresese id alapjan.
+     * @param commentId a keresett komment id-je
+     * @return a keresett komment
      */
     @GetMapping("/{commentId}")
     public ResponseEntity<Comment> getCommentById(@PathVariable long commentId){
@@ -36,7 +36,7 @@ public class CommentRestController {
 
     /**
      * Komment torlese id alapjan
-     * @param commentId
+     * @param commentId a torlendo komment id-je
      */
     @DeleteMapping("/delete/{commentId}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
