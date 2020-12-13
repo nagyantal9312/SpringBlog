@@ -72,20 +72,26 @@ public class BlogPostService {
     }
 
 
-
+    /**
+     * Posztra adott reakcio mentese. Ha a blogger meg nem ertekelte a posztot, uj rekord keletkezik.
+     * Ha ugyanugy ertekelte most mint korabban, akkor torlodik a rekord. Ha korabban maskepp ertekelte mint most, akkor modosul a rekord.
+     * @param blogPostId ertekelendo poszt id-je
+     * @param username ertekelo felhasznalo id-je
+     * @param type true:like, false:dislike
+     */
     public void saveBlogPostReaction(long blogPostId, String username, boolean type) {
 
-        //ertekelte e mar a user a posztot ugyanugy korabban mint most
+        //ertekelte e mar a user a posztot korabban ugyanugy mint most
         BlogPostReaction bpr  = blogPostReactionRepository.findByBlogPost_IdAndBlogger_UsernameAndReactionType(blogPostId, username, type);
-        //ertekelte e mar a user a posztot a mostani reakcioval ellentetes reakcioval
+        //ertekelte e mar a user a posztot korabban a mostani reakcioval ellentetes reakcioval
         BlogPostReaction negalt  = blogPostReactionRepository.findByBlogPost_IdAndBlogger_UsernameAndReactionType(blogPostId, username, !type);
 
         if(bpr != null) {
             blogPostReactionRepository.deleteById(bpr.getId());
-        }else if(negalt != null){
+        }else if(negalt != null) {
             negalt.setReactionType(type);
             blogPostReactionRepository.save(negalt);
-        }else{
+        }else {
             BlogPostReaction blogPostReaction = new BlogPostReaction();
             blogPostReaction.setBlogPost(blogPostRepository.findById(blogPostId).orElse(null));
             blogPostReaction.setBlogger(bloggerRepository.findByUsername(username));
@@ -97,14 +103,33 @@ public class BlogPostService {
     }
 
 
+    /**
+     *  Kommentre adott reakcio mentese. Ha a blogger meg nem ertekelte a kommentet, uj rekord keletkezik.
+     *  Ha ugyanugy ertekelte most mint korabban, akkor torlodik a rekord. Ha korabban maskepp ertekelte mint most, akkor modosul a rekord.
+     * @param commentId az ertekelendo komment id-je
+     * @param username az ertekelo felhasznalo id-je
+     * @param type true:like, false:dislike
+     */
     public void saveCommentReaction(long commentId, String username, boolean type) {
 
-        CommentReaction commentReaction = new CommentReaction();
-        commentReaction.setComment(commentRepository.findById(commentId).orElse(null));
-        commentReaction.setReactionType(type);
-        commentReaction.setBlogger(bloggerRepository.findByUsername(username));
-        commentReactionRepository.save(commentReaction);
+        //ertekelte e mar a user a kommentet korabban ugyanugy mint most
+        CommentReaction cr = commentReactionRepository.findByComment_IdAndBlogger_UsernameAndReactionType(commentId, username, type);
 
+        //ertekelte e mar a user a kommentet korabban a mostani reakcioval ellentetes reakcioval
+        CommentReaction negalt = commentReactionRepository.findByComment_IdAndBlogger_UsernameAndReactionType(commentId, username, !type);
+
+        if(cr != null) {
+            commentReactionRepository.deleteById(cr.getId());
+        }else if(negalt != null) {
+            negalt.setReactionType(type);
+            commentReactionRepository.save(negalt);
+        }else{
+            CommentReaction commentReaction = new CommentReaction();
+            commentReaction.setComment(commentRepository.findById(commentId).orElse(null));
+            commentReaction.setReactionType(type);
+            commentReaction.setBlogger(bloggerRepository.findByUsername(username));
+            commentReactionRepository.save(commentReaction);
+        }
     }
 
     public int countBlogPostReaction(long blogPostId, boolean type) {
