@@ -28,6 +28,15 @@ public class CommentService {
         return commentRepository.findById(id).orElse(null);
     }
 
+    public void editComment(long commentId, Comment comment) {
+
+        Comment eredeti = commentRepository.findById(commentId).orElse(null);
+        eredeti.setText(comment.getText());
+        commentRepository.save(eredeti);
+
+
+    }
+
 
 
 }

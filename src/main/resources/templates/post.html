@@ -100,7 +100,7 @@
                                 </a>
                             </div>
 
-                            <div>
+                            <div th:if="${item.createdBy} == ${#authentication.getName()}">
                                 <a href="#" th:href="@{/blogpost/comment/edit/{commentId}(commentId=${item.id})}">
                                     <img class="logo" th:src="@{/images/updateIcon.svg}">
                                 </a>

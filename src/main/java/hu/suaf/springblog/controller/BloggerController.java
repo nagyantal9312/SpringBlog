@@ -34,21 +34,12 @@ public class BloggerController {
         this.bloggerService = bloggerService;
     }
 
-/*
-
-    @GetMapping("")
-    public String listBlogPostsByCategory(Model model,@RequestParam("cim") String title){
-        System.out.println(title);
-       model.addAttribute("posztok", blogPostService.listBlogPosts());
-        return "home";
-    }
-*/
 
     /**
-     * Posztok listazasa a fo oldalon get keres
-     * @param model
-     * @param title
-     * @return
+     * Posztok cimeben kereses GET keressel
+     * @param model model
+     * @param title a szoveg amit a cimben keresunk
+     * @return fooldal, amin a keresett posztok listazodnak
      */
     @GetMapping("")
     public String listBlogPosts_get(Model model,@RequestParam(value = "cim", required = false) String title){
@@ -67,12 +58,7 @@ public class BloggerController {
         return "home";
     }
 
-    /**
-     * Poszt letrehozo oldalra get keres
-     * @param model
-     * @param blogPost
-     * @return
-     */
+
     @GetMapping("/post-create")
     public String createBlogPostForm(Model model, BlogPost blogPost) {
         //TODO: a blogpost validacio hibaja esetek nem toltodik be
@@ -81,10 +67,10 @@ public class BloggerController {
     }
 
     /**
-     * Uj poszt letrehozasa post keres
-     * @param blogPost
-     * @param bindingResult
-     * @return
+     * Uj poszt letrehozasa POST keressel
+     * @param blogPost az uj BlogPost
+     * @param bindingResult bindingresult
+     * @return ha sikeres a letrehozas akkor a fooldal, egyeb esetben a poszt letrehozo oldal
      */
     @PostMapping("/post-create")
     public String createBlogPost(@Valid BlogPost blogPost, BindingResult bindingResult){
@@ -96,10 +82,10 @@ public class BloggerController {
     }
 
     /**
-     * Profil oldal megjelenites get keres
-     * @param username
-     * @param model
-     * @return
+     * Profil oldal megjelenites GET keressel
+     * @param username a felhasznalo akie a profil oldal
+     * @param model model
+     * @return a felhasznalo profil oldala
      */
     @GetMapping("/profile/{username}")
     public String createProfilePage(@PathVariable String username, Model model) {
@@ -108,11 +94,11 @@ public class BloggerController {
     }
 
     /**
-     * Profil oldal modositasa post keres
-     * @param username
-     * @param blogger
-     * @param result
-     * @return
+     * Profil oldal modositasa POST keressel
+     * @param username a modositando felhasznalo felhasznaloneve
+     * @param blogger a modositas utani objektum
+     * @param result result
+     * @return a felhasznalo profil oldala
      */
     @PostMapping("/profile/{username}")
     public String editProfile(@PathVariable String username, @Valid Blogger blogger, BindingResult result){
@@ -127,10 +113,10 @@ public class BloggerController {
 
 
     /**
-     * Profil fenykep modositasa post keres
-     * @param username
-     * @param image
-     * @return
+     * Profil fenykep modositasa POST keressel
+     * @param username a felhasznalo akinek a fenykepet modositani akarjuk
+     * @param image a kep amivel modositani akarunk
+     * @return a felhasznalo profil oldala
      */
     @PostMapping("/profile/photo/{username}")
     public String editPhoto(@PathVariable String username, @RequestParam("image") MultipartFile image){

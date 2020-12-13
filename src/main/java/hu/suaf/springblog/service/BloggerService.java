@@ -59,6 +59,8 @@ public class BloggerService {
         //System.out.println("SSERVICE: " + blogger.getUsername() + blogger.getName() + blogger.getEmail() + blogger.getRoles() + blogger.getPassword() + blogger.getBirthDate());
         Blogger bg = bloggerRepository.findByUsername(blogger.getUsername());
         blogger.setPhoto(bg.getPhoto());
+        blogger.setBlogPostReactions(bg.getBlogPostReactions());
+        blogger.setCommentReactions(bg.getCommentReactions());
         if(blogger.getPassword() == null || blogger.getPassword().isEmpty()) {
             blogger.setPassword(bg.getPassword());
         }else{
