@@ -75,11 +75,25 @@ public class BlogPostService {
 
     public void saveBlogPostReaction(long blogPostId, String username, boolean type) {
 
-        BlogPostReaction blogPostReaction = new BlogPostReaction();
-        blogPostReaction.setBlogPost(blogPostRepository.findById(blogPostId).orElse(null));
-        blogPostReaction.setReactionType(type);
-        blogPostReaction.setBlogger(bloggerRepository.findByUsername(username));
-        blogPostReactionRepository.save(blogPostReaction);
+        //ertekelte e mar a user a posztot ugyanugy korabban mint most
+        BlogPostReaction bpr  = blogPostReactionRepository.findByBlogPost_IdAndBlogger_UsernameAndReactionType(blogPostId, username, type);
+        //ertekelte e mar a user a posztot a mostani reakcioval ellentetes reakcioval
+        BlogPostReaction negalt  = blogPostReactionRepository.findByBlogPost_IdAndBlogger_UsernameAndReactionType(blogPostId, username, !type);
+
+        if(bpr != null) {
+            blogPostReactionRepository.deleteById(bpr.getId());
+        }else if(negalt != null){
+            negalt.setReactionType(type);
+            blogPostReactionRepository.save(negalt);
+        }else{
+            BlogPostReaction blogPostReaction = new BlogPostReaction();
+            blogPostReaction.setBlogPost(blogPostRepository.findById(blogPostId).orElse(null));
+            blogPostReaction.setBlogger(bloggerRepository.findByUsername(username));
+            blogPostReaction.setReactionType(type);
+            blogPostReactionRepository.save(blogPostReaction);
+        }
+
+
     }
 
 
