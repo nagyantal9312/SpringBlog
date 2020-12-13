@@ -1,7 +1,6 @@
 package hu.suaf.springblog.controller.restcontroller;
 
 import hu.suaf.springblog.model.Category;
-import hu.suaf.springblog.model.Comment;
 import hu.suaf.springblog.service.BlogPostService;
 import hu.suaf.springblog.service.BloggerService;
 import hu.suaf.springblog.service.CategoryService;
@@ -13,23 +12,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Spliterators;
-
 @RestController
 @RequestMapping(path = "/api/category", produces = "application/json")
 @CrossOrigin("*")
 public class CategoryRestController {
 
-    private BlogPostService blogPostService;
-    private CategoryService categoryService;
-    private BloggerService bloggerService;
-    private CommentService commentService;
+    private final BlogPostService blogPostService;
+    private final CategoryService categoryService;
+    private final BloggerService bloggerService;
+    private final CommentService commentService;
 
 
-    public CategoryRestController(BlogPostService blogPostService, CommentService commentService, CategoryService categoryService) {
+    public CategoryRestController(BlogPostService blogPostService, CommentService commentService, CategoryService categoryService, BloggerService bloggerService) {
         this.blogPostService = blogPostService;
         this.commentService = commentService;
         this.categoryService = categoryService;
+        this.bloggerService = bloggerService;
 
     }
 
@@ -38,7 +36,7 @@ public class CategoryRestController {
      * @return
      */
     @GetMapping
-    public Iterable<Category> listCategories(){
+    public Iterable<Category> listCategories() {
         return categoryService.listCategories();
     }
 
@@ -49,14 +47,15 @@ public class CategoryRestController {
     @DeleteMapping("/delete/{name}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @Transactional
-    public void deleteCategory(@PathVariable String name){
+    public void deleteCategory(@PathVariable String name) {
         categoryService.deleteCategory(name);
     }
 
 
+    //TODO postmanban hiba az UTF-8 kodolassal
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public HttpEntity<Category> addCategory(@RequestBody Category category){
+    public HttpEntity<Category> addCategory(@RequestBody Category category) {
         //return categoryService.saveCategory(category);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.saveCategory(category));

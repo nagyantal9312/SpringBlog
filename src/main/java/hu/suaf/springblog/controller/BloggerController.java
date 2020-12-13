@@ -22,9 +22,9 @@ import java.util.Date;
 @RequestMapping("/blogger")
 public class BloggerController {
 
-    private BlogPostService blogPostService;
-    private CategoryService categoryService;
-    private BloggerService bloggerService;
+    private final BlogPostService blogPostService;
+    private final CategoryService categoryService;
+    private final BloggerService bloggerService;
 
 
     @Autowired
@@ -75,6 +75,7 @@ public class BloggerController {
      */
     @GetMapping("/post-create")
     public String createBlogPostForm(Model model, BlogPost blogPost) {
+        //TODO: a blogpost validacio hibaja esetek nem toltodik be
         model.addAttribute("kategoriak", categoryService.listCategories());
         return "post-create";
     }

@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/blogpost")
 public class BlogPostController {
 
-    private BlogPostService blogPostService;
-    private CategoryService categoryService;
-    private BloggerService bloggerService;
-    private CommentService commentService;
+    private final BlogPostService blogPostService;
+    private final CategoryService categoryService;
+    private final BloggerService bloggerService;
+    private final CommentService commentService;
 
     @Autowired
     public BlogPostController(BlogPostService blogPostService, CommentService commentService, CategoryService categoryService, BloggerService bloggerService) {

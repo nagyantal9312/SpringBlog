@@ -1,14 +1,9 @@
 package hu.suaf.springblog.controller.restcontroller;
 
 import hu.suaf.springblog.model.BlogPost;
-import hu.suaf.springblog.model.Blogger;
-import hu.suaf.springblog.model.Category;
-import hu.suaf.springblog.model.Comment;
 import hu.suaf.springblog.service.BlogPostService;
-import hu.suaf.springblog.service.BloggerService;
 import hu.suaf.springblog.service.CategoryService;
 import hu.suaf.springblog.service.CommentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,10 +16,9 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin("*")
 public class BlogPostRestController {
 
-    private BlogPostService blogPostService;
-    private CategoryService categoryService;
-    private BloggerService bloggerService;
-    private CommentService commentService;
+    private final BlogPostService blogPostService;
+    private final CategoryService categoryService;
+    private final CommentService commentService;
 
 
     public BlogPostRestController(BlogPostService blogPostService, CommentService commentService, CategoryService categoryService) {

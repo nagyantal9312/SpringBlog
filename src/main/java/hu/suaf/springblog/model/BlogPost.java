@@ -1,8 +1,7 @@
 package hu.suaf.springblog.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.*;
-import org.springframework.lang.Nullable;
+import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -10,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Data
-public class BlogPost extends AuditableEntity<String>{
+public class BlogPost extends AbstractAuditableEntity<String> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

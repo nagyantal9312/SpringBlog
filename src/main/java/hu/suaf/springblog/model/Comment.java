@@ -2,7 +2,6 @@ package hu.suaf.springblog.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Comment extends AuditableEntity<String> {
+public class Comment extends AbstractAuditableEntity<String> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

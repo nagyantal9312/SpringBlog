@@ -4,8 +4,6 @@ package hu.suaf.springblog.service;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import hu.suaf.springblog.model.Blogger;
-import hu.suaf.springblog.repository.BloggerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ExecutionException;
@@ -15,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class LoginAttemptService {
 
-    private final int MAX_ATTEMPT = 2;
+    private static final int MAX_ATTEMPT = 2;
     private LoadingCache<String, Integer> attemptsCache;
 
 

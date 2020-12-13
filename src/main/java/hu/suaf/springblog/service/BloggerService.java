@@ -17,9 +17,9 @@ import java.util.Base64;
 @Service
 public class BloggerService {
 
-    private BloggerRepository bloggerRepository;
-    private PasswordEncoder passwordEncoder;
-    private RoleService roleService;
+    private final BloggerRepository bloggerRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final RoleService roleService;
 
 
     @Autowired

@@ -12,12 +12,12 @@ import java.util.List;
 @Service
 public class BlogPostService {
 
-    private BlogPostRepository blogPostRepository;
-    private CategoryRepository categoryRepository;
-    private BloggerRepository bloggerRepository;
-    private CommentRepository commentRepository;
-    private BlogPostReactionRepository blogPostReactionRepository;
-    private CommentReactionRepository commentReactionRepository;
+    private final BlogPostRepository blogPostRepository;
+    private final CategoryRepository categoryRepository;
+    private final BloggerRepository bloggerRepository;
+    private final CommentRepository commentRepository;
+    private final BlogPostReactionRepository blogPostReactionRepository;
+    private final CommentReactionRepository commentReactionRepository;
 
     @Autowired
     public BlogPostService(BlogPostRepository blogPostRepository, CategoryRepository categoryRepository, BloggerRepository bloggerRepository, CommentRepository commentRepository, BlogPostReactionRepository blogPostReactionRepository, CommentReactionRepository commentReactionRepository) {
@@ -29,7 +29,7 @@ public class BlogPostService {
         this.commentReactionRepository = commentReactionRepository;
     }
 
-    public BlogPost saveBlogPost(BlogPost b){
+    public BlogPost saveBlogPost(BlogPost b) {
         List<Category> c = new ArrayList<>();
         List<String> k = Arrays.asList(b.getCategoryHelper().split(","));
         for(String item : k) {
@@ -73,7 +73,7 @@ public class BlogPostService {
 
 
 
-    public void saveBlogPostReaction(long blogPostId, String username, boolean type){
+    public void saveBlogPostReaction(long blogPostId, String username, boolean type) {
 
         BlogPostReaction blogPostReaction = new BlogPostReaction();
         blogPostReaction.setBlogPost(blogPostRepository.findById(blogPostId).orElse(null));
@@ -83,7 +83,7 @@ public class BlogPostService {
     }
 
 
-    public void saveCommentReaction(long commentId, String username, boolean type){
+    public void saveCommentReaction(long commentId, String username, boolean type) {
 
         CommentReaction commentReaction = new CommentReaction();
         commentReaction.setComment(commentRepository.findById(commentId).orElse(null));
@@ -93,12 +93,12 @@ public class BlogPostService {
 
     }
 
-    public int countBlogPostReaction(long blogPostId, boolean type){
-        return blogPostReactionRepository.countBlogPostReactionByBlogPost_IdAndReactionType(blogPostId,type);
+    public int countBlogPostReaction(long blogPostId, boolean type) {
+        return blogPostReactionRepository.countBlogPostReactionByBlogPost_IdAndReactionType(blogPostId, type);
     }
 
-    public int countCommentReaction(long commentId, boolean type){
-        return commentReactionRepository.countCommentReactionByComment_IdAndReactionType(commentId,type);
+    public int countCommentReaction(long commentId, boolean type) {
+        return commentReactionRepository.countCommentReactionByComment_IdAndReactionType(commentId, type);
 
     }
 

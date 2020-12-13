@@ -14,8 +14,8 @@ import javax.validation.Valid;
 @Controller
 public class AuthController {
 
-    private UserDetailsServiceImpl userDetailsServiceImpl;
-    private BloggerService bloggerService;
+    private final UserDetailsServiceImpl userDetailsServiceImpl;
+    private final BloggerService bloggerService;
 
 
     @Autowired
@@ -39,7 +39,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public String registerBlogger(@Valid Blogger blogger, BindingResult result){
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return "register";
         }
         bloggerService.registerBlogger(blogger);

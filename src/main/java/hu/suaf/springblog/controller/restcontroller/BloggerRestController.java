@@ -4,18 +4,10 @@ import hu.suaf.springblog.model.Blogger;
 import hu.suaf.springblog.service.BlogPostService;
 import hu.suaf.springblog.service.BloggerService;
 import hu.suaf.springblog.service.CategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping(path = "/api/blogger", produces = "application/json")
@@ -23,9 +15,9 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class BloggerRestController {
 
 
-    private BlogPostService blogPostService;
-    private CategoryService categoryService;
-    private BloggerService bloggerService;
+    private final BlogPostService blogPostService;
+    private final CategoryService categoryService;
+    private final BloggerService bloggerService;
 
 
     public BloggerRestController(BlogPostService blogPostService, CategoryService categoryService, BloggerService bloggerService) {

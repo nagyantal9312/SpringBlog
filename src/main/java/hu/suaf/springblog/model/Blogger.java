@@ -17,7 +17,7 @@ import java.util.List;
 
 @Entity
 @Data
-public class Blogger extends AuditableEntity<String> implements UserDetails {
+public class Blogger extends AbstractAuditableEntity<String> implements UserDetails {
 
     @Id
     @NotBlank
@@ -89,7 +89,7 @@ public class Blogger extends AuditableEntity<String> implements UserDetails {
     public boolean isEnabled() {
         /* Disabled indicates an account has been administratively or automatically disabled for some reason.
        Usually some action is required to release it. */
-        return this.enabled ? true : false;
+        return this.enabled;
     }
 
 

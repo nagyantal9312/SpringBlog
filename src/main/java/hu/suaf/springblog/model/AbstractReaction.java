@@ -11,7 +11,7 @@ import javax.persistence.MappedSuperclass;
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class Reaction {
+public abstract class AbstractReaction {
 
 
     private boolean reactionType;
